@@ -1,0 +1,28 @@
+{
+  "name": "git-splainin",
+  "version": "0.0.0",
+  "description": "GitHub PR Template Chrome Extension",
+  "author": "Blaine Bublitz <blaine@iceddev.com> (http://iceddev.com)",
+  "contributors": [],
+  "repository": "iceddev/git-splainin",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "main": "index.js",
+  "files": [
+    "LICENSE",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "chrome extension",
+    "github",
+    "pull request",
+    "template"
+  ]
+}
