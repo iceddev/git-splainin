@@ -9,11 +9,16 @@
   },
   "page_action": {
     "default_icon": "pr.png",
-    "default_title": "git-splainin: Git PR template"
+    "default_title": "git-splainin: Git PR template",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
   },
   "permissions": [
     "https://raw.githubusercontent.com/",
-    "activeTab",
+    "tabs",
     "storage"
   ],
   "content_scripts": [

@@ -2,6 +2,20 @@
 
 var rest = require('rest');
 
+var toggleState = 'Disable';
+
+function openOptions(){
+  chrome.runtime.openOptionsPage();
+}
+
+function disable(id){
+  chrome.tabs.sendMessage(id, { enabled: false });
+}
+
+function enable(id){
+  chrome.tabs.sendMessage(id, { enabled: true });
+}
+
 function getContent(){
   var url = 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md';
 
