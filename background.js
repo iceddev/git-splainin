@@ -15,3 +15,11 @@ function getContent(){
 }
 
 getContent();
+
+chrome.extension.onRequest.addListener(function(message, sender, sendResponse){
+  if(message === 'showAction'){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.pageAction.show(tabs[0].id);
+    });
+  }
+});
