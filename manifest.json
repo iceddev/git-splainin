@@ -12,6 +12,7 @@
     "default_title": "git-splainin: Git PR template"
   },
   "permissions": [
+    "https://raw.githubusercontent.com/",
     "activeTab",
     "storage"
   ],
