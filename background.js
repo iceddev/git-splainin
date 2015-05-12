@@ -2,7 +2,9 @@
 
 var rest = require('rest');
 
-var toggleState = 'Disable';
+var toggleEnableState = 'Disable';
+
+var templateUrl = 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md';
 
 function openOptions(){
   chrome.runtime.openOptionsPage();
@@ -17,9 +19,7 @@ function enable(id){
 }
 
 function getContent(){
-  var url = 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md';
-
-  return rest(url)
+  return rest(templateUrl)
     .then(function(response){
       chrome.storage.local.set({ 'prTemplate': response.entity });
     });

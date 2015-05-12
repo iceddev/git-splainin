@@ -8,18 +8,18 @@ function toggle(){
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
       bg.disable(tabs[0].id);
     });
-    bg.toggleState = 'Enable';
+    bg.toggleEnableState = 'Enable';
     toggleEnabled.innerHTML = 'Enable';
   }
   else{
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
       bg.enable(tabs[0].id);
     });
-    bg.toggleState = 'Disable';
+    bg.toggleEnableState = 'Disable';
     toggleEnabled.innerHTML = 'Disable';
   }
 }
 
-document.getElementById('disable').innerHTML = bg.toggleState;
+document.getElementById('disable').innerHTML = bg.toggleEnableState;
 document.getElementById('disable').addEventListener('click', toggle);
 document.getElementById('options').addEventListener('click', bg.openOptions);
