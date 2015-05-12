@@ -1,4 +1,6 @@
-var prBodyElement = document.getElementById("pull_request_body");
+'use strict';
+
+var prBodyElement = document.getElementById('pull_request_body');
 
 if(prBodyElement){
   chrome.extension.sendRequest('showAction');

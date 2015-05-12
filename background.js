@@ -1,3 +1,5 @@
+'use strict';
+
 function getContent(){
   var url = 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md';
   var x = new XMLHttpRequest();
@@ -16,7 +18,7 @@ function getContent(){
 
 getContent();
 
-chrome.extension.onRequest.addListener(function(message, sender, sendResponse){
+chrome.extension.onRequest.addListener(function(message){
   if(message === 'showAction'){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
       chrome.pageAction.show(tabs[0].id);
