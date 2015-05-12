@@ -7,6 +7,10 @@
   "background": {
     "scripts": ["background.js"]
   },
+  "page_action": {
+    "default_icon": "pr.png",
+    "default_title": "git-splainin: Git PR template"
+  },
   "permissions": [
     "activeTab",
     "storage"
