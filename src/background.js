@@ -1,6 +1,6 @@
 'use strict';
 
-var getContent = require('./getContent');
+const getContent = require('./getContent');
 
 chrome.storage.sync.set({
   templateUrl: 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md',
@@ -10,7 +10,7 @@ chrome.storage.sync.set({
 getContent();
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-  var regexUrl = /https:\/\/github\.com\/.*\/.*\/compare\/.*/;
+  const regexUrl = /https:\/\/github\.com\/.*\/.*\/compare\/.*/;
   if(tab.url.match(regexUrl)){
     chrome.pageAction.show(tabId);
     chrome.storage.sync.get('autoFill', function(res){

@@ -1,12 +1,12 @@
 'use strict';
 
-var getContent = require('./getContent');
+const getContent = require('./getContent');
 
-var displayUrl = document.getElementById('display_url');
-var editUrl = document.getElementById('edit_url');
-var url = document.getElementById('template_url');
-var urlInput = document.getElementById('url_input');
-var autoFill = document.getElementById('auto_fill');
+const displayUrl = document.getElementById('display_url');
+const editUrl = document.getElementById('edit_url');
+const url = document.getElementById('template_url');
+const urlInput = document.getElementById('url_input');
+const autoFill = document.getElementById('auto_fill');
 
 function showEdit(){
   displayUrl.style.display = 'none';
@@ -14,7 +14,7 @@ function showEdit(){
 }
 
 function submitUrl(){
-  var newUrl = urlInput.value;
+  const newUrl = urlInput.value;
   chrome.storage.sync.set({ templateUrl: newUrl });
   getContent();
   url.innerHTML = newUrl;
@@ -27,7 +27,7 @@ function toggleAutoFill(){
   chrome.storage.sync.set({ autoFill: autoFill.checked });
   if(autoFill.checked){
     chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
-      for(var i = 0; i < tabs.length; i++) {
+      for(let i = 0; i < tabs.length; i++) {
         chrome.tabs.sendMessage(tabs[i].id, { fillPR: true });
       }
     });
