@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-  entry: './background.js',
+  entry: './src/background.js',
   output: {
-    filename: 'bundledBackground.js',
+    filename: './background.js',
     path: __dirname
   }
 };

@@ -5,7 +5,7 @@
   "description": "You've got some git-splainin' to do",
   "version": "1.0",
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": ["background.js"]
   },
   "page_action": {
     "default_icon": "img/pr.png",
@@ -25,7 +25,7 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/*/*/compare/*"],
-      "js": ["js/fillPullBody.js"],
+      "js": ["srs/fillPullBody.js"],
       "run_at": "document_end"
     }
   ]
