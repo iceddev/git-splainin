@@ -5,18 +5,3 @@
 .selectable:hover {
   background-color: #D3D3D3;
 }
-
-.options_menu {
-  margin-left: 100px;
-  margin-top: 50px;
-  max-width: 600px;
-}
-
-.options_list {
-  margin-left: 20px;
-  margin-top: 20px;
-}
-
-#edit_icon {
-  margin-right: 5px;
-}
