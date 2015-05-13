@@ -5,15 +5,15 @@
   "description": "You've got some git-splainin' to do",
   "version": "1.0",
   "background": {
-    "scripts": ["bundledBackground.js"]
+    "scripts": ["js/background.js"]
   },
   "page_action": {
-    "default_icon": "pr.png",
+    "default_icon": "img/pr.png",
     "default_title": "git-splainin: Git PR template",
-    "default_popup": "popup.html"
+    "default_popup": "html/popup.html"
   },
   "options_ui": {
-    "page": "options.html",
+    "page": "html/options.html",
     "chrome_style": true,
     "open_in_tab": true
   },
@@ -25,7 +25,7 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/*/*/compare/*"],
-      "js": ["fillPullBody.js"],
+      "js": ["js/fillPullBody.js"],
       "run_at": "document_end"
     }
   ]
