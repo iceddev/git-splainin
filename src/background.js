@@ -9,10 +9,13 @@ chrome.storage.sync.set({
 
 getContent();
 
-chrome.extension.onRequest.addListener(function(message){
-  if(message === 'showAction'){
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
-      chrome.pageAction.show(tabs[0].id);
-    });
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+  var regexUrl = /https:\/\/github\.com\/.*\/.*\/compare\/.*/;
+
+  if(tab.url.match(regexUrl)){
+    chrome.pageAction.show(tabId);
+  }
+  else{
+    chrome.pageAction.hide(tabId);
   }
 });

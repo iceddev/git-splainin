@@ -11,7 +11,6 @@ chrome.runtime.onMessage.addListener(function(request){
 });
 
 if(prBodyElement){
-  chrome.extension.sendRequest('showAction');
   chrome.storage.sync.get('autoFill', function(res){
     if(res.autoFill){
       chrome.storage.sync.get('prTemplate', function(item){
