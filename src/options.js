@@ -1,26 +1,29 @@
 'use strict';
 
-var bg = chrome.extension.getBackgroundPage();
+var displayUrl = document.getElementById('display_url');
+var editUrl = document.getElementById('edit_url');
+var url = document.getElementById('template_url');
+var urlInput = document.getElementById('url_input');
 
-function editUrl(){
-  document.getElementById('display_url').style.display = 'none';
-  document.getElementById('edit_url').style.display = 'block';
+function showEdit(){
+  displayUrl.style.display = 'none';
+  editUrl.style.display = 'block';
 }
 
 function submitUrl(){
-  var newUrl = document.getElementById('url_input').value;
-  bg.templateUrl = newUrl;
-  var link = document.getElementById('template_url');
-  link.innerHTML = newUrl;
-  link.href = newUrl;
-  document.getElementById('edit_url').style.display = 'none';
-  document.getElementById('display_url').style.display = 'block';
+  var newUrl = urlInput.value;
+  chrome.storage.sync.set({ templateUrl: newUrl });
+  url.innerHTML = newUrl;
+  url.href = newUrl;
+  editUrl.style.display = 'none';
+  displayUrl.style.display = 'block';
 }
 
-document.getElementById('url_input').value = bg.templateUrl;
-var url = document.getElementById('template_url');
-url.innerHTML = bg.templateUrl;
-url.href = bg.templateUrl;
+chrome.storage.sync.get('templateUrl', function(res){
+  urlInput.value = res.templateUrl;
+  url.innerHTML = res.templateUrl;
+  url.href = res.templateUrl;
+});
 
-document.getElementById('edit_icon').addEventListener('click', editUrl);
-document.getElementById('submit_url').addEventListener('click', submitUrl);
+document.getElementById('edit_action').addEventListener('click', showEdit);
+document.getElementById('submit_action').addEventListener('click', submitUrl);

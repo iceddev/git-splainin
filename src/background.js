@@ -2,27 +2,18 @@
 
 var rest = require('rest');
 
-var toggleEnableState = 'Disable';
-
-var templateUrl = 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md';
-
-function openOptions(){
-  chrome.runtime.openOptionsPage();
-}
-
-function disable(id){
-  chrome.tabs.sendMessage(id, { enabled: false });
-}
-
-function enable(id){
-  chrome.tabs.sendMessage(id, { enabled: true });
-}
+chrome.storage.sync.set({
+  toggleEnabledState: 'Disable',
+  templateUrl: 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md'
+});
 
 function getContent(){
-  return rest(templateUrl)
-    .then(function(response){
-      chrome.storage.local.set({ 'prTemplate': response.entity });
-    });
+  chrome.storage.sync.get('templateUrl', function(res){
+    return rest(res.templateUrl)
+      .then(function(response){
+        chrome.storage.sync.set({ 'prTemplate': response.prTemplate });
+      });
+  });
 }
 
 getContent();
@@ -34,3 +25,5 @@ chrome.extension.onRequest.addListener(function(message){
     });
   }
 });
+
+
