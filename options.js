@@ -2,21 +2,25 @@
 
 var bg = chrome.extension.getBackgroundPage();
 
-function submitUrl(){
-  var newUrl = document.getElementById('url_field').value;
-  bg.templateUrl = newUrl;
-  var urlHTML = '<a href="' + newUrl + '">' + newUrl + '</a>';
-  document.getElementById('template_field').innerHTML = urlHTML;
-}
-
 function editUrl(){
-  var urlField = '<input id="url_field" type="text" name="url"><input id="submit_url" type="submit" value="Submit">';
-  document.getElementById('template_field').innerHTML = urlField;
-  document.getElementById('submit_url').addEventListener('click', submitUrl);
+  document.getElementById('display_url').style.display = 'none';
+  document.getElementById('edit_url').style.display = 'block';
 }
 
+function submitUrl(){
+  var newUrl = document.getElementById('url_input').value;
+  bg.templateUrl = newUrl;
+  var link = document.getElementById('template_url');
+  link.innerHTML = newUrl;
+  link.href = newUrl;
+  document.getElementById('edit_url').style.display = 'none';
+  document.getElementById('display_url').style.display = 'block';
+}
+
+document.getElementById('url_input').value = bg.templateUrl;
 var url = document.getElementById('template_url');
 url.innerHTML = bg.templateUrl;
 url.href = bg.templateUrl;
 
 document.getElementById('edit_icon').addEventListener('click', editUrl);
+document.getElementById('submit_url').addEventListener('click', submitUrl);

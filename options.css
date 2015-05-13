@@ -2,10 +2,6 @@
   cursor: pointer;
 }
 
-.selectable:hover {
-  background-color: #D3D3D3;
-}
-
 .options_menu {
   margin-left: 100px;
   margin-top: 50px;
@@ -17,6 +13,10 @@
   margin-top: 20px;
 }
 
-#edit_icon {
+.edit_icon {
   margin-right: 5px;
+}
+
+.edit_option {
+  display: none;
 }

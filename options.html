@@ -1,13 +1,23 @@
 <html>
   <head>
-    <title>Popup</title>
-    <link href="popup.css" rel="stylesheet" type="text/css">
+    <title>Options</title>
+    <link href="options.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <h1 id="options" class="selectable">Options</h1>
-    <h2>Template URL:</h2>
-    <p id="template_field"><a  id="template_url" href=""></a><p>
-    <p id="edit_icon">Edit icon</p>
+    <main class="options_menu">
+      <h1 id="options">Git-Splainin Options</h1>
+      <section class="options_list">
+      <h2>Edit Template URL:</h2>
+        <p id="display_url">
+          <a id="template_url" href=""></a>
+          <img src="edit.png" id="edit_icon" class="selectable edit_icon">
+        </p>
+        <p id="edit_url" class="edit_option">
+          <input id="url_input" type="text" name="url">
+          <input id="submit_url" type="submit" value="Save">
+        </p>
+      </section>
+    </main>
   </body>
   <script src="options.js"></script>
 </html>
