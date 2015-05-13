@@ -3,9 +3,8 @@
 var getContent = require('./getContent');
 
 chrome.storage.sync.set({
-  toggleEnabledState: 'Disable',
   templateUrl: 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md',
-  enabled: true
+  autoFill: false
 });
 
 getContent();
@@ -17,5 +16,3 @@ chrome.extension.onRequest.addListener(function(message){
     });
   }
 });
-
-
