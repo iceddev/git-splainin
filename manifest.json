@@ -5,7 +5,7 @@
   "description": "You've got some git-splanin' to do",
   "version": "1.0",
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["bundledBackground.js"]
   },
   "page_action": {
     "default_icon": "pr.png",
