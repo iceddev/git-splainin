@@ -2,11 +2,9 @@
 
 var prBodyElement = document.getElementById('pull_request_body');
 
-var enabled = true;
-
 chrome.runtime.onMessage.addListener(function(request){
-  enabled = request.enabled;
-  if(enabled){
+  chrome.storage.sync.set({ enabled: request.enabled });
+  if(request.enabled){
     chrome.storage.sync.get('prTemplate', function(item){
       prBodyElement.value = item.prTemplate;
     });
@@ -18,9 +16,11 @@ chrome.runtime.onMessage.addListener(function(request){
 
 if(prBodyElement){
   chrome.extension.sendRequest('showAction');
-  if(enabled){
-    chrome.storage.sync.get('prTemplate', function(item){
-      prBodyElement.value = item.prTemplate;
-    });
-  }
+  chrome.storage.sync.get('enabled', function(res){
+    if(res.enabled){
+      chrome.storage.sync.get('prTemplate', function(item){
+        prBodyElement.value = item.prTemplate;
+      });
+    }
+  });
 }

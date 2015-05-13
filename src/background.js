@@ -4,7 +4,8 @@ var rest = require('rest');
 
 chrome.storage.sync.set({
   toggleEnabledState: 'Disable',
-  templateUrl: 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md'
+  templateUrl: 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md',
+  enabled: true
 });
 
 function getContent(){
