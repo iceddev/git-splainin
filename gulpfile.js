@@ -11,6 +11,6 @@ function bundle(callback){
     gutil.log('Webpack bundle complete!');
     callback(err);
   });
-};
+}
 
 gulp.task('default', gulp.parallel(bundle));
