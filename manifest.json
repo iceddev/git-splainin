@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "Git-Splainin",
+  "description": "You've got some git-splanin' to do",
+  "version": "1.0",
+  "background": {
+    "scripts": ["bundledBackground.js"]
+  },
+  "page_action": {
+    "default_icon": "pr.png",
+    "default_title": "git-splainin: Git PR template"
+  },
+  "permissions": [
+    "https://raw.githubusercontent.com/",
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*/*/compare/*"],
+      "js": ["fillPullBody.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
