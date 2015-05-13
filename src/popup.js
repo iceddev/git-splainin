@@ -1,5 +1,9 @@
 'use strict';
 
+function openOptions(){
+  chrome.runtime.openOptionsPage();
+}
+
 function toggle(){
   var toggleEnabled = document.getElementById('disable');
   if(toggleEnabled.innerHTML === 'Disable'){
@@ -23,4 +27,4 @@ chrome.storage.sync.get('toggleEnabledState', function(res){
 });
 
 document.getElementById('disable').addEventListener('click', toggle);
-document.getElementById('options').addEventListener('click', chrome.runtime.openOptionsPage);
+document.getElementById('options').addEventListener('click', openOptions);

@@ -25,5 +25,5 @@ chrome.storage.sync.get('templateUrl', function(res){
   url.href = res.templateUrl;
 });
 
-document.getElementById('edit_action').addEventListener('click', showEdit);
-document.getElementById('submit_action').addEventListener('click', submitUrl);
+document.getElementById('url_edit_action').addEventListener('click', showEdit);
+document.getElementById('url_submit_action').addEventListener('click', submitUrl);

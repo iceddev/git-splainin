@@ -7,7 +7,7 @@ var enabled = true;
 chrome.runtime.onMessage.addListener(function(request){
   enabled = request.enabled;
   if(enabled){
-    chrome.storage.local.get('prTemplate', function(item){
+    chrome.storage.sync.get('prTemplate', function(item){
       prBodyElement.value = item.prTemplate;
     });
   }
