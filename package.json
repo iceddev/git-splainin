@@ -19,7 +19,9 @@
     "build": "gulp",
     "serve": "webpack-dev-server"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react": "^0.13.3"
+  },
   "devDependencies": {
     "babel-core": "^5.3.3",
     "babel-loader": "^5.0.0",
