@@ -1,5 +1,7 @@
 'use strict';
 
+var getContent = require('./getContent');
+
 var displayUrl = document.getElementById('display_url');
 var editUrl = document.getElementById('edit_url');
 var url = document.getElementById('template_url');
@@ -13,6 +15,7 @@ function showEdit(){
 function submitUrl(){
   var newUrl = urlInput.value;
   chrome.storage.sync.set({ templateUrl: newUrl });
+  getContent();
   url.innerHTML = newUrl;
   url.href = newUrl;
   editUrl.style.display = 'none';

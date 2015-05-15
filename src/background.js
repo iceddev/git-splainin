@@ -1,21 +1,12 @@
 'use strict';
 
-var rest = require('rest');
+var getContent = require('./getContent');
 
 chrome.storage.sync.set({
   toggleEnabledState: 'Disable',
   templateUrl: 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md',
   enabled: true
 });
-
-function getContent(){
-  chrome.storage.sync.get('templateUrl', function(res){
-    return rest(res.templateUrl)
-      .then(function(response){
-        chrome.storage.sync.set({ 'prTemplate': response.entity });
-      });
-  });
-}
 
 getContent();
 

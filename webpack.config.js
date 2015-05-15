@@ -1,9 +1,17 @@
 'use strict';
 
 module.exports = {
-  entry: './src/background.js',
+  entry: {
+    background: './src/background.js',
+    options: './src/options.js'
+  },
   output: {
-    filename: 'background.js',
+    filename: '[name].js',
     path: __dirname
+  },
+  module: {
+    loaders: [
+        { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
+    ]
   }
 };
