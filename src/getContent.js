@@ -1,6 +1,6 @@
 'use strict';
 
-var rest = require('rest');
+const rest = require('rest');
 
 function getContent(){
   chrome.storage.sync.get('templateUrl', function(res){
