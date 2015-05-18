@@ -29,7 +29,7 @@ function toggleAutoFill(){
   if(autoFill.checked){
     chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
       _.forEach(tabs, function(tab){
-        chrome.tabs.sendMEssage(tab.id, { fillPR: true });
+        chrome.tabs.sendMessage(tab.id, { fillPR: true });
       });
     });
   }
