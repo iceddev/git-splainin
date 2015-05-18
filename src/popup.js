@@ -1,31 +1,38 @@
 'use strict';
 
-var React = require('react');
-var style = require('./style/popup.js');
+const React = require('react');
 
-var FillForm = React.createClass({
+const style = require('../style/popup.js');
+
+const FillForm = React.createClass({
   handleClick: function(){
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
       chrome.tabs.sendMessage(tabs[0].id, { fillPR: true });
     });
   },
   render: function(){
-    return (<p onClick={this.handleClick}>'Fill Form'</p>);
+    return (<p onClick={this.handleClick} styles={[style.selectable]}>Fill Form</p>);
   }
 });
 
-var Options = React.createClass({
+const Options = React.createClass({
   handleClick: function(){
     chrome.runtime.openOptionsPage();
   },
   render: function(){
-    return (<p onClick={this.handleClick}>'Options'</p>);
+    return (<p onClick={this.handleClick} styles={[style.selectable]}>Options</p>);
   }
 });
 
-var list = (
-  <FillForm style.selectable />
-  <Options style.selectable />
-);
+const Wrapper = React.createClass({
+  render: function(){
+    return (
+      <div>
+        <FillForm />
+        <Options />
+      </div>
+      );
+  }
+});
 
-React.render(list, document.getElementById('options'));
+React.render(<Wrapper/>, document.getElementById('list'));
