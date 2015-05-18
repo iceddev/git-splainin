@@ -3,19 +3,23 @@
 var getContent = require('./getContent');
 
 chrome.storage.sync.set({
-  toggleEnabledState: 'Disable',
   templateUrl: 'https://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md',
-  enabled: true
+  autoFill: false
 });
 
 getContent();
 
-chrome.extension.onRequest.addListener(function(message){
-  if(message === 'showAction'){
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
-      chrome.pageAction.show(tabs[0].id);
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+  var regexUrl = /https:\/\/github\.com\/.*\/.*\/compare\/.*/;
+  if(tab.url.match(regexUrl)){
+    chrome.pageAction.show(tabId);
+    chrome.storage.sync.get('autoFill', function(res){
+      if(res.autoFill){
+        chrome.tabs.sendMessage(tabId, { fillPR: true });
+      }
     });
   }
+  else{
+    chrome.pageAction.hide(tabId);
+  }
 });
-
-
