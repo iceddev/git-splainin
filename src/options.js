@@ -25,6 +25,13 @@ function submitUrl(){
 
 function toggleAutoFill(){
   chrome.storage.sync.set({ autoFill: autoFill.checked });
+  if(autoFill.checked){
+    chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
+      for(var i = 0; i < tabs.length; i++) {
+        chrome.tabs.sendMessage(tabs[i].id, { fillPR: true });
+      }
+    });
+  }
 }
 
 chrome.storage.sync.get('templateUrl', function(res){
