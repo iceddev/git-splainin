@@ -1,13 +1,12 @@
 'use strict';
 
-var style = {
+const StyleSheet = require('react-style');
+
+const style = StyleSheet.create({
   'selectable': {
     'cursor': 'pointer',
     'white-space': 'nowrap'
-  },
-  'hover': {
-    'background-color': '#D3D3D3'
   }
-};
+});
 
 module.exports = style;

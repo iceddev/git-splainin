@@ -1,24 +1,23 @@
 'use strict';
 
-var style = {
+const StyleSheet = require('react-style');
+
+const style = StyleSheet.create({
   'selectable': {
     'cursor': 'pointer'
   },
   'options_menu': {
-    'margin-left': '100px',
-    'margin-top': '50px',
-    'max-width': '600px'
+    'marginLeft': '100px',
+    'marginTop': '50px',
+    'maxWidth': '600px'
   },
   'options_list': {
-    'margin-left': '20px',
-    'margin-top': '20px'
+    'marginLeft': '20px',
+    'marginTop': '20px'
   },
   'edit_icon': {
-    'margin-right': '5px'
-  },
-  'edit_option': {
-    'display': 'none'
+    'marginLeft': '5px'
   }
-};
+});
 
 module.exports = style;
