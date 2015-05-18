@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const getContent = require('./getContent');
 
 const displayUrl = document.getElementById('display_url');
@@ -27,9 +28,9 @@ function toggleAutoFill(){
   chrome.storage.sync.set({ autoFill: autoFill.checked });
   if(autoFill.checked){
     chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
-      for(let i = 0; i < tabs.length; i++) {
-        chrome.tabs.sendMessage(tabs[i].id, { fillPR: true });
-      }
+      _.forEach(tabs, function(tab){
+        chrome.tabs.sendMEssage(tab.id, { fillPR: true });
+      });
     });
   }
 }
