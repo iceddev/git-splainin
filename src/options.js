@@ -16,14 +16,14 @@ const EditUrl = React.createClass({
     };
   },
   componentDidMount: function(){
-    chrome.storage.sync.get('templateUrl', function(res){
-      if (this.isMounted()){
+    chrome.storage.sync.get('templateUrl', (res)=>{
+      if(this.isMounted()){
         this.setState({
           templateUrl: res.templateUrl,
           deltaUrl: res.templateUrl
         });
       }
-    }.bind(this));
+    });
   },
   handleUrlChange: function(){
     this.setState({ deltaUrl: event.target.value });
@@ -61,11 +61,11 @@ const EditAutoFill = React.createClass({
     return { autoFill: false };
   },
   componentDidMount: function(){
-    chrome.storage.sync.get('autoFill', function(res){
-      if (this.isMounted()){
+    chrome.storage.sync.get('autoFill', (res)=>{
+      if(this.isMounted()){
         this.setState({ autoFill: res.autoFill });
       }
-    }.bind(this));
+    });
   },
   toggle: function(){
     this.setState({ autoFill: event.target.checked });
