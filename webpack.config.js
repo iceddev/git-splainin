@@ -4,8 +4,7 @@ module.exports = {
   entry: {
     background: './src/background.js',
     options: './src/options.js',
-    fillPullBody: './src/fillPullBody.js',
-    popup: './src/popup.js'
+    fillPullBody: './src/fillPullBody.js'
   },
   output: {
     filename: '[name].js',
