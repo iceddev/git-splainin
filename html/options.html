@@ -1,25 +1,12 @@
 <html>
   <head>
     <title>Options</title>
-    <link href="../css/options.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../vendor/primer.css">
+    <link rel="stylesheet" type="text/css" href="../style/options.css">
   </head>
   <body>
-    <main class="options_menu">
-      <h1>Git-Splainin Options</h1>
-      <section class="options_list">
-        <h2>Template URL:</h2>
-          <p id="display_url">
-            <a id="template_url" href=""></a>
-            <img src="../img/edit.png" id="url_edit_action" class="selectable edit_icon">
-          </p>
-          <p id="edit_url" class="edit_option">
-            <input id="url_input" type="text" name="url">
-            <input id="url_submit_action" type="submit" value="Save">
-          </p>
-        <h2>Auto-fill:</h2>
-          <input id="auto_fill" type="checkbox">Auto-fill template in every pull request
-      </section>
-    </main>
+    <div id="list">
+    </div>
   </body>
   <script src="../options.js"></script>
 </html>

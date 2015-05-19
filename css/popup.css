@@ -1,8 +1,0 @@
-.selectable {
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.selectable:hover {
-  background-color: #D3D3D3;
-}
