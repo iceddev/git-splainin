@@ -20,7 +20,7 @@ module.exports = {
           /node_modules/
         ],
         loaders: [
-          'babel-loader'
+          'babel-loader?optional=runtime'
         ]
       }
     ]
