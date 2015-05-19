@@ -5,7 +5,7 @@ const getContent = require('./getContent');
 chrome.storage.sync.get(['templateUrl', 'autoFill'], function({templateUrl, autoFill}){
   if(!templateUrl){
     chrome.storage.sync.set({
-      templateUrl: 'http://raw.githubusercontent.com/iceddev/getting-started/master/pr-template.md'
+      templateUrl: 'http://cdn.rawgit.com/iceddev/getting-started/master/pr-template.md'
     }, getContent);
   } else {
     getContent();
