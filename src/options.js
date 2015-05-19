@@ -4,7 +4,6 @@ const _ = require('lodash');
 const React = require('react');
 
 const getContent = require('./getContent');
-const style = require('../style/options.js');
 
 class EditUrl extends React.Component {
   constructor(){
@@ -48,15 +47,15 @@ class EditUrl extends React.Component {
   }
   render(){
     return (
-      <section styles={[style.options_list]}>
+      <section className='columns'>
         <h2>Template URL:</h2>
-        <p styles={[{display: this.state.displayUrl}]}>
+        <p style={{display: this.state.displayUrl}}>
           <a href={this.state.templateUrl}>{this.state.templateUrl}</a>
-          <img src='../img/edit.png' onClick={this.handleEdit} styles={[style.selectable, style.edit_icon]}></img>
+          <img src='../img/edit.png' className='url_edit_action' onClick={this.handleEdit}></img>
         </p>
-        <p styles={[{display: this.state.editUrl}]}>
+        <p style={{display: this.state.editUrl}}>
           <input type='text' name='url' onChange={this.handleUrlChange} value={this.state.deltaUrl}></input>
-          <input type='submit' value='Save' onClick={this.handleSubmit}></input>
+          <button type='submit' className='btn url_submit_action' onClick={this.handleSubmit}>Save</button>
         </p>
       </section>
     );
@@ -88,7 +87,7 @@ class EditAutoFill extends React.Component {
   render(){
     let { autoFill } = this.state;
     return (
-      <section styles={[style.options_list]}>
+      <section className='columns'>
         <h2>Auto-fill:</h2>
         <input type="checkbox" checked={autoFill} onChange={this.toggle}>Enable auto-fill</input>
       </section>
@@ -99,7 +98,7 @@ class EditAutoFill extends React.Component {
 class Wrapper extends React.Component {
   render(){
     return (
-      <main styles={[style.options_menu]}>
+      <main>
         <h1>Git-Splainin Options</h1>
         <EditUrl />
         <EditAutoFill />
