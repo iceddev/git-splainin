@@ -6,35 +6,38 @@ const React = require('react');
 const getContent = require('./getContent');
 const style = require('../style/options.js');
 
-const EditUrl = React.createClass({
-  getInitialState: function(){
-    return {
+class EditUrl extends React.Component {
+  constructor(){
+    super();
+    this.state = {
       templateUrl: '',
       deltaUrl: '',
       displayUrl: 'block',
       editUrl: 'none'
     };
-  },
-  componentDidMount: function(){
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.handleUrlChange = this.handleUrlChange.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentDidMount(){
     chrome.storage.sync.get('templateUrl', (res)=>{
-      if(this.isMounted()){
-        this.setState({
-          templateUrl: res.templateUrl,
-          deltaUrl: res.templateUrl
-        });
-      }
+      this.setState({
+        templateUrl: res.templateUrl,
+        deltaUrl: res.templateUrl
+      });
     });
-  },
-  handleUrlChange: function(){
+  }
+  handleUrlChange(){
     this.setState({ deltaUrl: event.target.value });
-  },
-  handleEdit: function(){
+  }
+  handleEdit(){
     this.setState({
       displayUrl: 'none',
       editUrl: 'block'
     });
-  },
-  handleSubmit: function(){
+  }
+  handleSubmit(){
     this.setState({
       displayUrl: 'block',
       editUrl: 'none',
@@ -43,8 +46,8 @@ const EditUrl = React.createClass({
 
     chrome.storage.sync.set({ templateUrl: this.state.deltaUrl});
     getContent();
-  },
-  render: function(){
+  }
+  render(){
     return (
       <section styles={[style.options_list]}>
         <h2>Template URL:</h2>
@@ -59,20 +62,21 @@ const EditUrl = React.createClass({
       </section>
     );
   }
-});
+}
 
-const EditAutoFill = React.createClass({
-  getInitialState: function(){
-    return { autoFill: false };
-  },
-  componentDidMount: function(){
+class EditAutoFill extends React.Component {
+  constructor(){
+    super();
+    this.state = { autoFill: false };
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.toggle = this.toggle.bind(this);
+  }
+  componentDidMount(){
     chrome.storage.sync.get('autoFill', (res)=>{
-      if(this.isMounted()){
-        this.setState({ autoFill: res.autoFill });
-      }
+      this.setState({ autoFill: res.autoFill });
     });
-  },
-  toggle: function(){
+  }
+  toggle(){
     this.setState({ autoFill: event.target.checked });
     chrome.storage.sync.set({ autoFill: event.target.checked });
     if(event.target.checked){
@@ -82,19 +86,20 @@ const EditAutoFill = React.createClass({
         });
       });
     }
-  },
-  render: function(){
+  }
+  render(){
+    let { autoFill } = this.state;
     return (
       <section styles={[style.options_list]}>
         <h2>Auto-fill:</h2>
-        <input type="checkbox" checked={this.state.autoFill} onChange={this.toggle}>Enable auto-fill</input>
+        <input type="checkbox" checked={autoFill} onChange={this.toggle}>Enable auto-fill</input>
       </section>
     );
   }
-});
+}
 
-const Wrapper = React.createClass({
-  render: function(){
+class Wrapper extends React.Component {
+  render(){
     return (
       <main styles={[style.options_menu]}>
         <h1>Git-Splainin Options</h1>
@@ -103,6 +108,6 @@ const Wrapper = React.createClass({
       </main>
     );
   }
-});
+}
 
 React.render(<Wrapper />, document.getElementById('list'));
