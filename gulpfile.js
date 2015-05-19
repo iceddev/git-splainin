@@ -1,5 +1,6 @@
 'use strict';
 
+var del = require('del');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
@@ -13,4 +14,9 @@ function bundle(callback){
   });
 }
 
+function postInstall(callback){
+  del('node_modules/**/*.pem', callback);
+}
+
+gulp.task(postInstall);
 gulp.task('default', gulp.parallel(bundle));
