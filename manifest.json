@@ -7,8 +7,15 @@
   "background": {
     "scripts": ["background.js"]
   },
+  "icons": {
+    "48": "img/pr48.png",
+    "128": "img/pr128.png"
+  },
   "page_action": {
-    "default_icon": "img/pr.png",
+    "default_icon": {
+      "19": "img/pr19.png",
+      "38": "img/pr38.png"
+    },
     "default_title": "git-splainin: Git PR template"
   },
   "options_ui": {
