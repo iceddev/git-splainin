@@ -8,13 +8,13 @@
     "scripts": ["background.js"]
   },
   "icons": {
-    "48": "img/pr48.png",
-    "128": "img/pr128.png"
+    "48": "vendor/octicons/pr48.png",
+    "128": "vendor/octicons/pr128.png"
   },
   "page_action": {
     "default_icon": {
-      "19": "img/pr19.png",
-      "38": "img/pr38.png"
+      "19": "vendor/octicons/pr19.png",
+      "38": "vendor/octicons/pr38.png"
     },
     "default_title": "git-splainin: Git PR template"
   },
