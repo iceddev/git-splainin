@@ -6,8 +6,8 @@ const React = require('react');
 const getContent = require('./getContent');
 
 class EditUrl extends React.Component {
-  constructor(){
-    super();
+  constructor(...args){
+    super(...args);
     this.state = {
       templateUrl: '',
       deltaUrl: '',
@@ -63,8 +63,8 @@ class EditUrl extends React.Component {
 }
 
 class EditAutoFill extends React.Component {
-  constructor(){
-    super();
+  constructor(...args){
+    super(...args);
     this.state = { autoFill: false };
     this.toggle = this.toggle.bind(this);
   }
