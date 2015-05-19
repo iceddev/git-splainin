@@ -21,9 +21,6 @@
   },
   "dependencies": {
     "babel-core": "^5.3.3",
-    "babel-loader": "^5.0.0",
-    "react": "^0.13.3",
-    "react-style": "^0.5.5",
     "when": "^3.7.3"
   },
   "devDependencies": {
