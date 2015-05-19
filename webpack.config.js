@@ -1,5 +1,7 @@
 'use strict';
 
+var shouldWatch = (process.argv.indexOf('--watch') !== -1);
+
 module.exports = {
   entry: {
     background: './src/background.js',
@@ -23,5 +25,6 @@ module.exports = {
       }
     ]
   },
-  bail: true
+  bail: true,
+  watch: shouldWatch
 };

@@ -18,7 +18,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp",
     "postinstall": "gulp postInstall",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server",
+    "watch": "gulp --watch"
   },
   "dependencies": {},
   "devDependencies": {
