@@ -15,7 +15,6 @@ class EditUrl extends React.Component {
       displayUrl: 'block',
       editUrl: 'none'
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -68,7 +67,6 @@ class EditAutoFill extends React.Component {
   constructor(){
     super();
     this.state = { autoFill: false };
-    this.componentDidMount = this.componentDidMount.bind(this);
     this.toggle = this.toggle.bind(this);
   }
   componentDidMount(){
