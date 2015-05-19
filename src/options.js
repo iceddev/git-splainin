@@ -47,7 +47,7 @@ class EditUrl extends React.Component {
   }
   render(){
     return (
-      <section className='columns'>
+      <section>
         <h2>Template URL:</h2>
         <p style={{display: this.state.displayUrl}}>
           <a href={this.state.templateUrl}>{this.state.templateUrl}</a>
@@ -87,7 +87,7 @@ class EditAutoFill extends React.Component {
   render(){
     let { autoFill } = this.state;
     return (
-      <section className='columns'>
+      <section>
         <h2>Auto-fill:</h2>
         <input type="checkbox" checked={autoFill} onChange={this.toggle}>Enable auto-fill</input>
       </section>
@@ -98,7 +98,7 @@ class EditAutoFill extends React.Component {
 class Wrapper extends React.Component {
   render(){
     return (
-      <main>
+      <main className='container'>
         <h1>Git-Splainin Options</h1>
         <EditUrl />
         <EditAutoFill />
