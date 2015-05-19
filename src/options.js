@@ -15,6 +15,16 @@ const EditUrl = React.createClass({
       editUrl: 'none'
     };
   },
+  componentDidMount: function(){
+    chrome.storage.sync.get('templateUrl', function(res){
+      if (this.isMounted()){
+        this.setState({
+          templateUrl: res.templateUrl,
+          deltaUrl: res.templateUrl
+        });
+      }
+    }.bind(this));
+  },
   handleUrlChange: function(){
     this.setState({ deltaUrl: event.target.value });
   },
@@ -30,16 +40,15 @@ const EditUrl = React.createClass({
     getContent();
   },
   render: function(){
-    let url = this.state.templateUrl;
     return (
       <section styles={[style.options_list]}>
         <h2>Template URL:</h2>
         <p styles={[{display: this.state.displayUrl}]}>
-          <a href={this.state.templateUrl}>{url}</a>
+          <a href={this.state.templateUrl}>{this.state.templateUrl}</a>
           <img src='../img/edit.png' onClick={this.handleEdit} styles={[style.selectable, style.edit_icon]}></img>
         </p>
         <p styles={[{display: this.state.editUrl}]}>
-          <input type='text' name='url' onChange={this.handleUrlChange}></input>
+          <input type='text' name='url' onChange={this.handleUrlChange} value={this.state.deltaUrl}></input>
           <input type='submit' value='Save' onClick={this.handleSubmit}></input>
         </p>
       </section>
@@ -49,11 +58,14 @@ const EditUrl = React.createClass({
 
 const EditAutoFill = React.createClass({
   getInitialState: function(){
-    let initialAutoFill;
+    return { autoFill: false };
+  },
+  componentDidMount: function(){
     chrome.storage.sync.get('autoFill', function(res){
-      initialAutoFill = res.autoFill;
-    });
-    return { autoFill: initialAutoFill };
+      if (this.isMounted()){
+        this.setState({ autoFill: res.autoFill });
+      }
+    }.bind(this));
   },
   toggle: function(){
     this.setState({ autoFill: event.target.checked });
@@ -88,4 +100,4 @@ const Wrapper = React.createClass({
   }
 });
 
-React.render(<Wrapper/>, document.getElementById('list'));
+React.render(<Wrapper />, document.getElementById('list'));
