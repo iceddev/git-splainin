@@ -29,13 +29,18 @@ const EditUrl = React.createClass({
     this.setState({ deltaUrl: event.target.value });
   },
   handleEdit: function(){
-    this.setState({ displayUrl: 'none' });
-    this.setState({ editUrl: 'block' });
+    this.setState({
+      displayUrl: 'none',
+      editUrl: 'block'
+    });
   },
   handleSubmit: function(){
-    this.setState({ displayUrl: 'block' });
-    this.setState({ editUrl: 'none' });
-    this.setState({ templateUrl: this.state.deltaUrl });
+    this.setState({
+      displayUrl: 'block',
+      editUrl: 'none',
+      templateUrl: this.state.deltaUrl
+    });
+
     chrome.storage.sync.set({ templateUrl: this.state.deltaUrl});
     getContent();
   },
@@ -82,7 +87,7 @@ const EditAutoFill = React.createClass({
     return (
       <section styles={[style.options_list]}>
         <h2>Auto-fill:</h2>
-        <input type={"checkbox"} checked={this.state.autoFill} onChange={this.toggle}>Enable auto-fill</input>
+        <input type="checkbox" checked={this.state.autoFill} onChange={this.toggle}>Enable auto-fill</input>
       </section>
     );
   }
