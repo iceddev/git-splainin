@@ -9,8 +9,7 @@
   },
   "page_action": {
     "default_icon": "img/pr.png",
-    "default_title": "git-splainin: Git PR template",
-    "default_popup": "html/popup.html"
+    "default_title": "git-splainin: Git PR template"
   },
   "options_ui": {
     "page": "html/options.html",
