@@ -2,13 +2,15 @@
 
 const getContent = require('./getContent');
 
-chrome.storage.sync.get(['templateUrl', 'autoFill'], function({templateUrl, autoFill}){
-  if(!templateUrl){
-    chrome.storage.sync.set({
-      templateUrl: 'http://cdn.rawgit.com/iceddev/getting-started/master/pr-template.md'
-    }, getContent);
-  } else {
-    getContent();
+chrome.storage.sync.get(['templateUrl', 'prTemplate', 'autoFill'], function({templateUrl, prTemplate, autoFill}){
+  if(!prTemplate){
+    if(!templateUrl){
+      chrome.storage.sync.set({
+        templateUrl: 'http://cdn.rawgit.com/iceddev/getting-started/master/pr-template.md'
+      }, getContent);
+    } else {
+      getContent();
+    }
   }
   if(autoFill === undefined){
     chrome.storage.sync.set({ autoFill: false });
