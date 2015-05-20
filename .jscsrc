@@ -7,7 +7,6 @@
       "for",
       "while"
     ],
-    "disallowSpaceBeforeKeywords": null,
     "disallowSpacesInFunction": {
       "beforeOpeningCurlyBrace": true,
       "beforeOpeningRoundBrace": true

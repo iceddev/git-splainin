@@ -6,11 +6,9 @@ var jscs = require('gulp-jscs');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
 var eslint = require('gulp-eslint');
-var stylish = require('gulp-jscs-stylish');
 
 var webpackConfig = require('./webpack.config');
 
-function noop() {}
 function bundle(callback){
   webpack(webpackConfig, function(err){
     gutil.log('Webpack bundle complete!');
@@ -23,8 +21,7 @@ function lint(){
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(jscs())
-    .on('error', noop)
-    .pipe(stylish());
+    .pipe(eslint.failAfterError());
 }
 
 function postInstall(callback){
