@@ -43,8 +43,14 @@ class Layout extends React.Component {
         <section className="columns">
           <div className="one-fifth column">
             <Menu selected={tab}>
-              <MenuItem onClick={(evt) => this.updateTab(0, evt)}>Template</MenuItem>
-              <MenuItem onClick={(evt) => this.updateTab(1, evt)}>Configuration</MenuItem>
+              <MenuItem href='#' onClick={(evt) => this.updateTab(0, evt)}>
+                <span className='octicon octicon-pencil'></span>
+                Template
+              </MenuItem>
+              <MenuItem href='#' onClick={(evt) => this.updateTab(1, evt)}>
+                <span className='octicon octicon-gear'></span>
+                Configuration
+              </MenuItem>
             </Menu>
           </div>
           <TabComponent />

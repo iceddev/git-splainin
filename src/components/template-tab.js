@@ -53,7 +53,14 @@ class TemplateTab extends React.Component {
             <label htmlFor='url'>Template URL:</label>
           </dt>
           <dd>
-            <input className='long' id='url' type='text' name='url' onChange={this.handleUrlChange} value={deltaUrl} />
+            <div className='input-group'>
+              <input className='long' id='url' type='text' name='url' onChange={this.handleUrlChange} value={deltaUrl} />
+              <span className='input-group-button'>
+                <Button>
+                  Load <span className='octicon octicon-cloud-download'></span>
+                </Button>
+              </span>
+            </div>
           </dd>
         </dl>
         <div className="form-actions">
