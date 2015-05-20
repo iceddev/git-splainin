@@ -1,0 +1,30 @@
+{
+    "preset": "node-style-guide",
+    "esnext": true,
+    "esprima": "esprima-fb",
+    "disallowSpaceAfterKeywords": [
+      "if",
+      "for",
+      "while"
+    ],
+    "disallowSpaceBeforeKeywords": null,
+    "disallowSpacesInFunction": {
+      "beforeOpeningCurlyBrace": true,
+      "beforeOpeningRoundBrace": true
+    },
+    "maximumLineLength": null,
+    "requireSpaceAfterKeywords": [
+      "else",
+      "try",
+      "catch",
+      "do",
+      "switch"
+    ],
+    "requireSpaceBeforeBlockStatements": null,
+    "requireSpaceBeforeKeywords": [
+      "else",
+      "catch"
+    ],
+    "requireSpacesInFunction": null,
+    "requireTrailingComma": null
+}
