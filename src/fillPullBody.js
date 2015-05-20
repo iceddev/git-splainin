@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function(request){
           prBodyElement.value += '\n';
         }
         prBodyElement.value = prBodyElement.value + prTemplate;
-      } else if(prBodyElement.value.includes(prTemplate)){
+      } else {
         prBodyElement.value = prBodyElement.value.replace(prTemplate, '');
       }
     });
