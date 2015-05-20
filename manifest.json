@@ -20,7 +20,7 @@
   },
   "options_ui": {
     "page": "html/options.html",
-    "chrome_style": true,
+    "chrome_style": false,
     "open_in_tab": true
   },
   "permissions": [
