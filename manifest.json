@@ -24,8 +24,8 @@
     "open_in_tab": true
   },
   "permissions": [
-    "http://cdn.rawgit.com/",
-    "http://rawgit.com/",
+    "http://*/",
+    "https://*/",
     "tabs",
     "storage"
   ],
