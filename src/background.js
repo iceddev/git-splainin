@@ -1,6 +1,6 @@
 'use strict';
 
-const getContent = require('./getContent');
+const getContent = require('./lib/getContent');
 
 chrome.storage.sync.get(['templateUrl', 'prTemplate', 'autoFill'], function({templateUrl, prTemplate, autoFill}){
   if(!prTemplate){

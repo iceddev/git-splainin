@@ -1,10 +1,10 @@
 'use strict';
 
-const rest = require('rest');
+const client = require('./client');
 
 function getContent(){
   chrome.storage.sync.get('templateUrl', function(res){
-    return rest(res.templateUrl)
+    return client(res.templateUrl)
       .then(function(response){
         chrome.storage.sync.set({ prTemplate: response.entity });
       });
