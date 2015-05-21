@@ -85,7 +85,8 @@ class TemplateTab extends React.Component {
       deltaUrl: this.state.templateUrl,
       deltaTemplate: this.state.prTemplate,
       disableCancel: true,
-      disableSubmit: true
+      disableSubmit: true,
+      errorMessage: ''
     });
   }
   handleSubmit(){
@@ -95,7 +96,8 @@ class TemplateTab extends React.Component {
       templateUrl: deltaUrl,
       prTemplate: deltaTemplate,
       disableCancel: true,
-      disableSubmit: true
+      disableSubmit: true,
+      errorMessage: ''
     });
 
     chrome.storage.sync.set({
