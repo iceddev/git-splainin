@@ -59,8 +59,14 @@ class TemplateTab extends React.Component {
         }
       })
       .otherwise((err)=>{
+        let errorMessage = err.error;
+
+        if(err.status && err.status.text){
+          errorMessage = err.status.text;
+        }
+
         this.setState({
-          errorMessage: err.status.text
+          errorMessage: errorMessage
         });
       });
   }
