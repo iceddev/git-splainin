@@ -5,7 +5,7 @@ const React = require('react');
 
 const client = require('../lib/client');
 const Button = require('../primed/button');
-const chromeApi = require('chromeback');
+const chromeApi = require('chromeback')(chrome);
 const getErrorMessage = require('../lib/getErrorMessage');
 
 class TemplateTab extends React.Component {
