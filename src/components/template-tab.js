@@ -30,7 +30,7 @@ class TemplateTab extends React.Component {
   componentDidMount(){
     chromeApi.storage.sync.get(['templateUrl', 'prTemplate'], (err, res)=>{
       if(err){
-        this.handlerError(err);
+        this.handleError(err);
       } else {
         this.setState({
           templateUrl: res.templateUrl,
@@ -109,7 +109,7 @@ class TemplateTab extends React.Component {
         this.handleError(err);
       } else {
         chromeApi.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
-          //If the message doesn't go to the tabs we silently error
+          // If the message doesn't go to the tabs we silently error
           _.forEach(tabs, function(tab){
             chromeApi.tabs.sendMessage(tab.id, { replaceTemplate: prTemplate });
           });

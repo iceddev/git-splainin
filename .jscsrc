@@ -19,7 +19,6 @@
       "do",
       "switch"
     ],
-    "requireSpaceAfterLineComment": null,
     "requireSpaceBeforeBlockStatements": null,
     "requireSpaceBeforeKeywords": [
       "else",
