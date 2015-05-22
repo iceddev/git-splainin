@@ -1,8 +1,9 @@
 'use strict';
 
 const _ = require('lodash');
-const rest = require('rest');
 const React = require('react');
+
+const client = require('../lib/client');
 
 const Button = require('../primed/button');
 
@@ -15,7 +16,8 @@ class TemplateTab extends React.Component {
       prTemplate: '',
       deltaTemplate: '',
       disableCancel: true,
-      disableSubmit: true
+      disableSubmit: true,
+      errorMessage: ''
     };
     this.handleTemplateChange = this.handleTemplateChange.bind(this);
     this.handleLoad = this.handleLoad.bind(this);
@@ -41,10 +43,11 @@ class TemplateTab extends React.Component {
     });
   }
   handleLoad(){
-    rest(this.state.deltaUrl)
+    client(this.state.deltaUrl)
       .then((response)=>{
         this.setState({
-          deltaTemplate: response.entity
+          deltaTemplate: response.entity,
+          errorMessage: ''
         });
         if(response.entity === this.state.prTemplate){
           this.setState({ disableSubmit: true });
@@ -54,6 +57,17 @@ class TemplateTab extends React.Component {
         } else {
           this.setState({ disableSubmit: false });
         }
+      })
+      .otherwise((err)=>{
+        let errorMessage = err.error;
+
+        if(err.status && err.status.text){
+          errorMessage = err.status.text;
+        }
+
+        this.setState({
+          errorMessage: errorMessage
+        });
       });
   }
   handleUrlChange(){
@@ -71,7 +85,8 @@ class TemplateTab extends React.Component {
       deltaUrl: this.state.templateUrl,
       deltaTemplate: this.state.prTemplate,
       disableCancel: true,
-      disableSubmit: true
+      disableSubmit: true,
+      errorMessage: ''
     });
   }
   handleSubmit(){
@@ -81,7 +96,8 @@ class TemplateTab extends React.Component {
       templateUrl: deltaUrl,
       prTemplate: deltaTemplate,
       disableCancel: true,
-      disableSubmit: true
+      disableSubmit: true,
+      errorMessage: ''
     });
 
     chrome.storage.sync.set({
@@ -95,11 +111,21 @@ class TemplateTab extends React.Component {
       });
     });
   }
+  renderError(){
+    if(this.state.errorMessage){
+      return (
+        <div className="flash flash-error">
+          {this.state.errorMessage}
+        </div>
+       );
+    }
+  }
   render(){
     const { deltaUrl, deltaTemplate } = this.state;
 
     return (
       <div className="four-fifths column">
+        {this.renderError()}
         <dl className='form'>
           <dt>
             <label htmlFor='template'>Template:</label>
