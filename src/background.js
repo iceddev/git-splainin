@@ -2,12 +2,10 @@
 
 const getContent = require('./lib/getContent');
 
-const chromeApi = require('./lib/chromeBack');
-
-chromeApi.storage.sync.get(['templateUrl', 'prTemplate', 'autoFill'], function(err, {templateUrl, prTemplate, autoFill}){
+chrome.storage.sync.get(['templateUrl', 'prTemplate', 'autoFill'], function({templateUrl, prTemplate, autoFill}){
   if(!prTemplate){
     if(!templateUrl){
-      chromeApi.storage.sync.set({
+      chrome.storage.sync.set({
         templateUrl: 'http://cdn.rawgit.com/iceddev/getting-started/master/pr-template.md'
       }, getContent);
     } else {
@@ -15,26 +13,26 @@ chromeApi.storage.sync.get(['templateUrl', 'prTemplate', 'autoFill'], function(e
     }
   }
   if(autoFill === undefined){
-    chromeApi.storage.sync.set({ autoFill: false });
+    chrome.storage.sync.set({ autoFill: false });
   }
 });
 
-chromeApi.pageAction.onClicked.addListener(function(){
-  chromeApi.tabs.query({ active: true, currentWindow: true }, function(tabs){
-    chromeApi.tabs.sendMessage(tabs[0].id, { fillPR: true });
+chrome.pageAction.onClicked.addListener(function(){
+  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
+    chrome.tabs.sendMessage(tabs[0].id, { fillPR: true });
   });
 });
 
-chromeApi.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
   const regexUrl = /https:\/\/github\.com\/.*\/.*\/compare\/.*/;
   if(tab.url.match(regexUrl)){
-    chromeApi.pageAction.show(tabId);
-    chromeApi.storage.sync.get('autoFill', function(res){
+    chrome.pageAction.show(tabId);
+    chrome.storage.sync.get('autoFill', function(res){
       if(res.autoFill){
-        chromeApi.tabs.sendMessage(tabId, { fillPR: true });
+        chrome.tabs.sendMessage(tabId, { fillPR: true });
       }
     });
   } else {
-    chromeApi.pageAction.hide(tabId);
+    chrome.pageAction.hide(tabId);
   }
 });

@@ -50,22 +50,25 @@ class TemplateTab extends React.Component {
       errorMessage: ''
     });
   }
-  handlerError(err){
-    let errorMessage = getErrorMessage(err);
+  handleError(err){
+    const errorMessage = getErrorMessage(err);
+
     this.setState({
       errorMessage: errorMessage
     });
   }
   handleLoad(){
-    client(this.state.deltaUrl)
+    const { deltaUrl, prTemplate, templateUrl } = this.state;
+
+    client(deltaUrl)
       .then((response)=>{
         this.setState({
           deltaTemplate: response.entity,
           errorMessage: ''
         });
-        if(response.entity === this.state.prTemplate){
+        if(response.entity === prTemplate){
           this.setState({ disableSubmit: true });
-          if(this.state.deltaUrl === this.state.templateUrl){
+          if(this.state.deltaUrl === templateUrl){
             this.setState({ disableCancel: true });
           }
         } else {
@@ -80,6 +83,7 @@ class TemplateTab extends React.Component {
     this.setState({
       deltaUrl: event.target.value
     });
+
     if(event.target.value !== this.state.templateUrl){
       this.setState({
         disableCancel: false
@@ -102,7 +106,7 @@ class TemplateTab extends React.Component {
       templateUrl: deltaUrl
     }, (err)=>{
       if(err){
-        this.handlerError(err);
+        this.handleError(err);
       } else {
         chromeApi.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
           //If the message doesn't go to the tabs we silently error
