@@ -5,6 +5,10 @@ function getErrorMessage(err){
     return err.status.text;
   }
 
+  if(err.error){
+    return err.error;
+  }
+
   if(err.target && err.target.error){
     return err.target.error;
   }
