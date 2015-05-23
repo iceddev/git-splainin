@@ -4,8 +4,9 @@ const _ = require('lodash');
 const React = require('react');
 
 const client = require('../lib/client');
-
 const Button = require('../primed/button');
+const chromeApi = require('chromeback')(chrome);
+const getErrorMessage = require('../lib/getErrorMessage');
 
 class TemplateTab extends React.Component {
   constructor(...args){
@@ -19,66 +20,26 @@ class TemplateTab extends React.Component {
       disableSubmit: true,
       errorMessage: ''
     };
-    this.handleTemplateChange = this.handleTemplateChange.bind(this);
-    this.handleLoad = this.handleLoad.bind(this);
-    this.handleUrlChange = this.handleUrlChange.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleError = this.handleError.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTemplateChange = this.handleTemplateChange.bind(this);
+    this.handleUrlChange = this.handleUrlChange.bind(this);
   }
   componentDidMount(){
-    chrome.storage.sync.get(['templateUrl', 'prTemplate'], (res)=>{
-      this.setState({
-        templateUrl: res.templateUrl,
-        deltaUrl: res.templateUrl,
-        prTemplate: res.prTemplate,
-        deltaTemplate: res.prTemplate
-      });
-    });
-  }
-  handleTemplateChange(){
-    this.setState({
-      deltaTemplate: event.target.value,
-      disableCancel: false,
-      disableSubmit: false
-    });
-  }
-  handleLoad(){
-    client(this.state.deltaUrl)
-      .then((response)=>{
+    chromeApi.storage.sync.get(['templateUrl', 'prTemplate'], (err, res)=>{
+      if(err){
+        this.handleError(err);
+      } else {
         this.setState({
-          deltaTemplate: response.entity,
-          errorMessage: ''
+          templateUrl: res.templateUrl,
+          deltaUrl: res.templateUrl,
+          prTemplate: res.prTemplate,
+          deltaTemplate: res.prTemplate
         });
-        if(response.entity === this.state.prTemplate){
-          this.setState({ disableSubmit: true });
-          if(this.state.deltaUrl === this.state.templateUrl){
-            this.setState({ disableCancel: true });
-          }
-        } else {
-          this.setState({ disableSubmit: false });
-        }
-      })
-      .otherwise((err)=>{
-        let errorMessage = err.error;
-
-        if(err.status && err.status.text){
-          errorMessage = err.status.text;
-        }
-
-        this.setState({
-          errorMessage: errorMessage
-        });
-      });
-  }
-  handleUrlChange(){
-    this.setState({
-      deltaUrl: event.target.value
+      }
     });
-    if(event.target.value !== this.state.templateUrl){
-      this.setState({
-        disableCancel: false
-      });
-    }
   }
   handleCancel(){
     this.setState({
@@ -89,26 +50,75 @@ class TemplateTab extends React.Component {
       errorMessage: ''
     });
   }
+  handleError(err){
+    const errorMessage = getErrorMessage(err);
+
+    this.setState({
+      errorMessage: errorMessage
+    });
+  }
+  handleLoad(){
+    const { deltaUrl, prTemplate, templateUrl } = this.state;
+
+    client(deltaUrl)
+      .then((response)=>{
+        this.setState({
+          deltaTemplate: response.entity,
+          errorMessage: ''
+        });
+        if(response.entity === prTemplate){
+          this.setState({ disableSubmit: true });
+          if(this.state.deltaUrl === templateUrl){
+            this.setState({ disableCancel: true });
+          }
+        } else {
+          this.setState({ disableSubmit: false });
+        }
+      })
+      .otherwise(this.handleError);
+  }
+  handleUrlChange(){
+    this.setState({
+      deltaUrl: event.target.value
+    });
+
+    if(event.target.value !== this.state.templateUrl){
+      this.setState({
+        disableCancel: false
+      });
+    }
+  }
   handleSubmit(){
     const { deltaUrl, deltaTemplate, prTemplate } = this.state;
 
-    this.setState({
-      templateUrl: deltaUrl,
-      prTemplate: deltaTemplate,
-      disableCancel: true,
-      disableSubmit: true,
-      errorMessage: ''
-    });
-
-    chrome.storage.sync.set({
+    chromeApi.storage.sync.set({
       prTemplate: deltaTemplate,
       templateUrl: deltaUrl
-    }, function(){
-      chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
-        _.forEach(tabs, function(tab){
-          chrome.tabs.sendMessage(tab.id, { replaceTemplate: prTemplate });
+    }, (err)=>{
+      if(err){
+        this.handleError(err);
+      } else {
+        chromeApi.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
+          // If the message doesn't go to the tabs we silently error
+          _.forEach(tabs, function(tab){
+            chromeApi.tabs.sendMessage(tab.id, { replaceTemplate: prTemplate });
+          });
         });
-      });
+        this.setState({
+          templateUrl: deltaUrl,
+          prTemplate: deltaTemplate,
+          disableCancel: true,
+          disableSubmit: true,
+          errorMessage: ''
+        });
+      }
+    });
+  }
+  handleTemplateChange(){
+    this.setState({
+      deltaTemplate: event.target.value,
+      disableCancel: false,
+      disableSubmit: false
     });
   }
   renderError(){
