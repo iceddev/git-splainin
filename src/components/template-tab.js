@@ -75,9 +75,7 @@ class TemplateTab extends React.Component {
           this.setState({ disableSubmit: false });
         }
       })
-      .otherwise((err)=>{
-        this.handleError(err);
-      });
+      .otherwise(this.handleError);
   }
   handleUrlChange(){
     this.setState({
