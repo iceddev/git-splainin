@@ -91,14 +91,6 @@ class TemplateTab extends React.Component {
   handleSubmit(){
     const { deltaUrl, deltaTemplate, prTemplate } = this.state;
 
-    this.setState({
-      templateUrl: deltaUrl,
-      prTemplate: deltaTemplate,
-      disableCancel: true,
-      disableSubmit: true,
-      errorMessage: ''
-    });
-
     chromeApi.storage.sync.set({
       prTemplate: deltaTemplate,
       templateUrl: deltaUrl
@@ -111,6 +103,13 @@ class TemplateTab extends React.Component {
           _.forEach(tabs, function(tab){
             chromeApi.tabs.sendMessage(tab.id, { replaceTemplate: prTemplate });
           });
+        });
+        this.setState({
+          templateUrl: deltaUrl,
+          prTemplate: deltaTemplate,
+          disableCancel: true,
+          disableSubmit: true,
+          errorMessage: ''
         });
       }
     });
