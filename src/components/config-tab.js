@@ -1,30 +1,39 @@
 'use strict';
 
-const _ = require('lodash');
 const React = require('react');
+const store = require('../stores/configStore');
+const actions = require('../actions/configActions');
 
 const Checkbox = require('../primed/checkbox');
 
 class ConfigTab extends React.Component {
   constructor(...args){
     super(...args);
-    this.state = { autoFill: false };
+    this.state = {
+      autoFill: false,
+      errorMessage: ''
+    };
     this.toggle = this.toggle.bind(this);
   }
   componentDidMount(){
-    chrome.storage.sync.get('autoFill', (res)=>{
-      this.setState({ autoFill: res.autoFill });
+    store.listen((state)=>{
+      this.setState(state);
     });
+    actions.fetchConfig('autoFill');
+  }
+  componentWillUnmount(){
+    store.unlisten();
   }
   toggle(){
-    this.setState({ autoFill: event.target.checked });
-    chrome.storage.sync.set({ autoFill: event.target.checked });
-    if(event.target.checked){
-      chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
-        _.forEach(tabs, function(tab){
-          chrome.tabs.sendMessage(tab.id, { fillPR: true });
-        });
-      });
+    actions.setConfig({ autoFill: event.target.checked });
+  }
+  renderError(){
+    if(this.state.errorMessage){
+      return (
+        <div className="flash flash-error">
+          {this.state.errorMessage}
+        </div>
+       );
     }
   }
   render(){
