@@ -1,9 +1,9 @@
 'use strict';
 
 const React = require('react');
+const { createContainer } = require('sovereign');
 
 const configStore = require('../stores/configStore');
-const connectToStore = require('../connect-to-stores.js');
 const {
   fetchConfig,
   setConfig
@@ -56,7 +56,7 @@ class ConfigTab extends React.Component {
   }
 }
 
-module.exports = connectToStore(ConfigTab, {
+module.exports = createContainer(ConfigTab, {
   getStores(){
     return {
       config: configStore

@@ -5,7 +5,7 @@ const chromeApi = require('chromeback')(chrome);
 
 const alt = require('../alt');
 const getErrorMessage = require('../lib/getErrorMessage');
-const actions = require('../actions/configActions');
+const { fetchConfig, setConfig } = require('../actions/configActions');
 
 class configStore {
   constructor(){
@@ -15,8 +15,8 @@ class configStore {
     };
 
     this.bindListeners({
-      handleFetchConfig: actions.FETCH_CONFIG,
-      handleSetConfig: actions.SET_CONFIG
+      handleFetchConfig: fetchConfig,
+      handleSetConfig: setConfig
     });
   }
 

@@ -1,10 +1,10 @@
 'use strict';
 
 const React = require('react');
+const { createContainer } = require('sovereign');
 
 const Button = require('../primed/button');
 const templateStore = require('../stores/templateStore');
-const connectToStore = require('../connect-to-stores.js');
 const {
   fetchStoredTemplate,
   cancelChanges,
@@ -70,7 +70,7 @@ class TemplateTab extends React.Component {
   }
 }
 
-module.exports = connectToStore(TemplateTab, {
+module.exports = createContainer(TemplateTab, {
   getStores(){
     return {
       template: templateStore
