@@ -23,10 +23,6 @@ class templateActions {
     this.dispatch(newUrl);
   }
 
-  setTemplate(settings){
-    this.dispatch(settings);
-  }
-
   submitTemplate(){
     this.dispatch();
   }

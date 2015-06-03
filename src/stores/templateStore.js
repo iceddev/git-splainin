@@ -12,7 +12,6 @@ const {
   fetchStoredTemplate,
   setDeltaTemplate,
   setDeltaUrl,
-  setTemplate,
   submitTemplate
 } = require('../actions/templateActions');
 
@@ -34,7 +33,6 @@ class templateStore {
       handleFetchStoredTemplate: fetchStoredTemplate,
       handleSetDeltaTemplate: setDeltaTemplate,
       handleSetDeltaUrl: setDeltaUrl,
-      handleSetTemplate: setTemplate,
       handleSubmitTemplate: submitTemplate
     });
   }
@@ -105,14 +103,6 @@ class templateStore {
     if(newUrl.target.value !== this.state.templateUrl){
       this.setState({ disableCancel: false });
     }
-  }
-
-  handleSetTemplate(settings){
-    chromeApi.storage.sync.set(settings, (err)=>{
-      if(err){
-        this.setState({ errorMessage: getErrorMessage(err) });
-      }
-    });
   }
 
   handleSubmitTemplate(){
