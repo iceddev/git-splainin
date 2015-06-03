@@ -63,11 +63,17 @@ class templateStore {
             this.setState({ disableCancel: true });
           }
         } else {
-          this.setState({ disableSubmit: false });
+          this.setState({
+            disableSubmit: false,
+            disableCancel: false
+          });
         }
       })
-      .otherwise(function(err){
-        this.setState({ errorMessage: getErrorMessage(err) });
+      .otherwise((err)=>{
+        this.setState({
+          errorMessage: getErrorMessage(err),
+          disableSubmit: true
+        });
       });
   }
 
@@ -135,5 +141,9 @@ class templateStore {
     });
   }
 }
+
+templateStore.config = {
+  stateKey: 'state'
+};
 
 module.exports = alt.createStore(templateStore);

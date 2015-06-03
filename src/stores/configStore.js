@@ -1,32 +1,55 @@
 'use strict';
 
+const _ = require('lodash');
+const chromeApi = require('chromeback')(chrome);
+
 const alt = require('../alt');
 const getErrorMessage = require('../lib/getErrorMessage');
 const actions = require('../actions/configActions');
 
 class configStore {
   constructor(){
-    this.autoFill = null;
-    this.errorMessage = null;
+    this.state = {
+      autoFill: null,
+      errorMessage: null
+    };
 
     this.bindListeners({
-      handleConfigUpdate: actions.UPDATE_CONFIG,
-      handleConfigError: actions.CONFIG_ERROR,
+      handleFetchConfig: actions.FETCH_CONFIG,
       handleSetConfig: actions.SET_CONFIG
     });
   }
 
-  handleConfigError(err){
-    this.errorMessage = getErrorMessage(err);
+  handleFetchConfig(settings){
+    chromeApi.storage.sync.get(settings, (err, res)=>{
+      if(err){
+        this.setState({ errorMessage: getErrorMessage(err) });
+      } else {
+        this.setState({ autoFill: res.autoFill });
+      }
+    });
   }
 
-  handleConfigUpdate(autoFill){
-    this.autoFill = autoFill.autoFill;
-  }
-
-  handleSetConfig(autoFill){
-    this.autoFill = autoFill.autoFill;
+  handleSetConfig(settings){
+    chromeApi.storage.sync.set({ autoFill: settings }, (err)=>{
+      if(err){
+        this.setState({ errorMessage: getErrorMessage(err) });
+      } else {
+        this.setState({ autoFill: settings });
+        if(settings){
+          chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
+            _.forEach(tabs, function(tab){
+              chrome.tabs.sendMessage(tab.id, { fillPR: true });
+            });
+          });
+        }
+      }
+    });
   }
 }
+
+configStore.config = {
+  stateKey: 'state'
+};
 
 module.exports = alt.createStore(configStore, 'configStore');

@@ -1,43 +1,38 @@
 'use strict';
 
 const React = require('react');
-const store = require('../stores/configStore');
-const actions = require('../actions/configActions');
 
+const configStore = require('../stores/configStore');
+const connectToStore = require('../connect-to-stores.js');
+const {
+  fetchConfig,
+  setConfig
+} = require('../actions/configActions');
 const Checkbox = require('../primed/checkbox');
 
 class ConfigTab extends React.Component {
   constructor(...args){
     super(...args);
-    this.state = {
-      autoFill: false,
-      errorMessage: ''
-    };
-    this.toggle = this.toggle.bind(this);
   }
   componentDidMount(){
-    store.listen((state)=>{
-      this.setState(state);
-    });
-    actions.fetchConfig('autoFill');
+    fetchConfig('autoFill');
   }
-  componentWillUnmount(){
-    store.unlisten();
-  }
-  toggle(){
-    actions.setConfig({ autoFill: event.target.checked });
+  config(){
+    setConfig(event.target.checked);
   }
   renderError(){
-    if(this.state.errorMessage){
+    const { errorMessage } = this.props;
+
+    if(errorMessage){
       return (
         <div className="flash flash-error">
-          {this.state.errorMessage}
+          {errorMessage}
         </div>
        );
     }
   }
   render(){
-    const { autoFill } = this.state;
+    const { autoFill } = this.props;
 
     const note = (
       <span>This will cause every <strong>Pull Request</strong> to be populated automatically.</span>
@@ -45,12 +40,13 @@ class ConfigTab extends React.Component {
 
     return (
       <section className='column'>
+        {this.renderError()}
         <dl className='form'>
           <dt>
             <label htmlFor='auto-fill'>Auto-fill:</label>
           </dt>
           <dd>
-            <Checkbox id='auto-fill' checked={autoFill} onChange={this.toggle} note={note}>
+            <Checkbox id='auto-fill' checked={autoFill} onChange={this.config} note={note}>
               Enable auto-fill
             </Checkbox>
           </dd>
@@ -60,4 +56,14 @@ class ConfigTab extends React.Component {
   }
 }
 
-module.exports = ConfigTab;
+module.exports = connectToStore(ConfigTab, {
+  getStores(){
+    return {
+      config: configStore
+    };
+  },
+
+  getPropsFromStores(){
+    return configStore.getState();
+  }
+});
