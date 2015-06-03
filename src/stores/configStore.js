@@ -5,9 +5,9 @@ const chromeApi = require('chromeback')(chrome);
 
 const alt = require('../alt');
 const getErrorMessage = require('../lib/getErrorMessage');
-const { fetchConfig, setConfig } = require('../actions/configActions');
+const { setConfig } = require('../actions/configActions');
 
-class configStore {
+class ConfigStore {
   constructor(){
     this.state = {
       autoFill: null,
@@ -15,13 +15,10 @@ class configStore {
     };
 
     this.bindListeners({
-      handleFetchConfig: fetchConfig,
       handleSetConfig: setConfig
     });
-  }
 
-  handleFetchConfig(settings){
-    chromeApi.storage.sync.get(settings, (err, res)=>{
+    chromeApi.storage.sync.get('autoFill', (err, res)=>{
       if(err){
         this.setState({ errorMessage: getErrorMessage(err) });
       } else {
@@ -48,8 +45,8 @@ class configStore {
   }
 }
 
-configStore.config = {
+ConfigStore.config = {
   stateKey: 'state'
 };
 
-module.exports = alt.createStore(configStore, 'configStore');
+module.exports = alt.createStore(ConfigStore);

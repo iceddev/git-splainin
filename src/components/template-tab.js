@@ -5,21 +5,12 @@ const { createContainer } = require('sovereign');
 
 const Button = require('../primed/button');
 const templateStore = require('../stores/templateStore');
-const {
-  fetchStoredTemplate,
-  cancelChanges,
-  fetchNewTemplate,
-  setDeltaUrl,
-  submitTemplate,
-  setDeltaTemplate
-} = require('../actions/templateActions');
+const { fetchNewTemplate, submitTemplate } = require('../actions/syncTemplateActions');
+const { cancelChanges, setDeltaUrl, setDeltaTemplate } = require('../actions/editTemplateActions');
 
 class TemplateTab extends React.Component {
   constructor(...args){
     super(...args);
-  }
-  componentDidMount(){
-    fetchStoredTemplate(['templateUrl', 'prTemplate']);
   }
   renderError(){
     const { errorMessage } = this.props;

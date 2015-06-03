@@ -2,14 +2,10 @@
 
 const alt = require('../alt');
 
-class configActions {
-  fetchConfig(settings){
-    this.dispatch(settings);
-  }
-
+class ConfigActions {
   setConfig(settings){
     this.dispatch(settings);
   }
 }
 
-module.exports = alt.createActions(configActions);
+module.exports = alt.createActions(ConfigActions);

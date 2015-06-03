@@ -3,21 +3,15 @@
 const React = require('react');
 const { createContainer } = require('sovereign');
 
-const configStore = require('../stores/configStore');
-const {
-  fetchConfig,
-  setConfig
-} = require('../actions/configActions');
 const Checkbox = require('../primed/checkbox');
+const configStore = require('../stores/configStore');
+const { setConfig } = require('../actions/configActions');
 
 class ConfigTab extends React.Component {
   constructor(...args){
     super(...args);
   }
-  componentDidMount(){
-    fetchConfig('autoFill');
-  }
-  config(){
+  config(event){
     setConfig(event.target.checked);
   }
   renderError(){

@@ -6,16 +6,10 @@ const chromeApi = require('chromeback')(chrome);
 const alt = require('../alt');
 const client = require('../lib/client');
 const getErrorMessage = require('../lib/getErrorMessage');
-const {
-  cancelChanges,
-  fetchNewTemplate,
-  fetchStoredTemplate,
-  setDeltaTemplate,
-  setDeltaUrl,
-  submitTemplate
-} = require('../actions/templateActions');
+const { fetchNewTemplate, submitTemplate } = require('../actions/syncTemplateActions');
+const { cancelChanges, setDeltaTemplate, setDeltaUrl } = require('../actions/editTemplateActions');
 
-class templateStore {
+class TemplateStore {
   constructor(){
     this.state = {
       prTemplate: null,
@@ -30,10 +24,22 @@ class templateStore {
     this.bindListeners({
       handleCancelChanges: cancelChanges,
       handleFetchNewTemplate: fetchNewTemplate,
-      handleFetchStoredTemplate: fetchStoredTemplate,
       handleSetDeltaTemplate: setDeltaTemplate,
       handleSetDeltaUrl: setDeltaUrl,
       handleSubmitTemplate: submitTemplate
+    });
+
+    chromeApi.storage.sync.get(['templateUrl', 'prTemplate'], (err, res)=>{
+      if(err){
+        this.setState({ errorMessage: getErrorMessage(err) });
+      } else {
+        this.setState({
+          prTemplate: res.prTemplate,
+          templateUrl: res.templateUrl,
+          deltaUrl: res.templateUrl,
+          deltaTemplate: res.prTemplate
+        });
+      }
     });
   }
 
@@ -73,21 +79,6 @@ class templateStore {
           disableSubmit: true
         });
       });
-  }
-
-  handleFetchStoredTemplate(settings){
-    chromeApi.storage.sync.get(settings, (err, res)=>{
-      if(err){
-        this.setState({ errorMessage: getErrorMessage(err) });
-      } else {
-        this.setState({
-          prTemplate: res.prTemplate,
-          templateUrl: res.templateUrl,
-          deltaUrl: res.templateUrl,
-          deltaTemplate: res.prTemplate
-        });
-      }
-    });
   }
 
   handleSetDeltaTemplate(newTemplate){
@@ -132,8 +123,8 @@ class templateStore {
   }
 }
 
-templateStore.config = {
+TemplateStore.config = {
   stateKey: 'state'
 };
 
-module.exports = alt.createStore(templateStore);
+module.exports = alt.createStore(TemplateStore);
