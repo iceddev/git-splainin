@@ -83,15 +83,15 @@ class TemplateStore {
 
   handleSetDeltaTemplate(newTemplate){
     this.setState({
-      deltaTemplate: newTemplate.target.value,
+      deltaTemplate: newTemplate,
       disableSubmit: false,
       disableCancel: false
     });
   }
 
   handleSetDeltaUrl(newUrl){
-    this.setState({ deltaUrl: newUrl.target.value });
-    if(newUrl.target.value !== this.state.templateUrl){
+    this.setState({ deltaUrl: newUrl });
+    if(newUrl !== this.state.templateUrl){
       this.setState({ disableCancel: false });
     }
   }

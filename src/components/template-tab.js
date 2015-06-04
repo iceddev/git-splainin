@@ -23,6 +23,12 @@ class TemplateTab extends React.Component {
        );
     }
   }
+  templateChange(event){
+    setDeltaTemplate(event.target.value);
+  }
+  urlChange(event){
+    setDeltaUrl(event.target.value);
+  }
   render(){
     const { deltaUrl, deltaTemplate, disableSubmit, disableCancel } = this.props;
 
@@ -34,7 +40,7 @@ class TemplateTab extends React.Component {
             <label htmlFor='template'>Template:</label>
           </dt>
           <dd>
-            <textarea id='template' onChange={setDeltaTemplate} value={deltaTemplate}/>
+            <textarea id='template' onChange={this.templateChange} value={deltaTemplate}/>
           </dd>
         </dl>
         <dl className='form'>
@@ -43,7 +49,7 @@ class TemplateTab extends React.Component {
           </dt>
           <dd>
             <div className='input-group'>
-              <input className='long' id='url' type='text' name='url' onChange={setDeltaUrl} value={deltaUrl} />
+              <input className='long' id='url' type='text' name='url' onChange={this.urlChange} value={deltaUrl} />
               <span className='input-group-button'>
                 <Button onClick={fetchNewTemplate}>
                   Load <span className='octicon octicon-cloud-download'></span>
