@@ -1,34 +1,32 @@
 'use strict';
 
-const _ = require('lodash');
 const React = require('react');
+const { createContainer } = require('sovereign');
 
 const Checkbox = require('../primed/checkbox');
+const configStore = require('../stores/configStore');
+const { setConfig } = require('../actions/configActions');
 
 class ConfigTab extends React.Component {
   constructor(...args){
     super(...args);
-    this.state = { autoFill: false };
-    this.toggle = this.toggle.bind(this);
   }
-  componentDidMount(){
-    chrome.storage.sync.get('autoFill', (res)=>{
-      this.setState({ autoFill: res.autoFill });
-    });
+  config(event){
+    setConfig(event.target.checked);
   }
-  toggle(){
-    this.setState({ autoFill: event.target.checked });
-    chrome.storage.sync.set({ autoFill: event.target.checked });
-    if(event.target.checked){
-      chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
-        _.forEach(tabs, function(tab){
-          chrome.tabs.sendMessage(tab.id, { fillPR: true });
-        });
-      });
+  renderError(){
+    const { errorMessage } = this.props;
+
+    if(errorMessage){
+      return (
+        <div className="flash flash-error">
+          {errorMessage}
+        </div>
+       );
     }
   }
   render(){
-    const { autoFill } = this.state;
+    const { autoFill } = this.props;
 
     const note = (
       <span>This will cause every <strong>Pull Request</strong> to be populated automatically.</span>
@@ -36,12 +34,13 @@ class ConfigTab extends React.Component {
 
     return (
       <section className='column'>
+        {this.renderError()}
         <dl className='form'>
           <dt>
             <label htmlFor='auto-fill'>Auto-fill:</label>
           </dt>
           <dd>
-            <Checkbox id='auto-fill' checked={autoFill} onChange={this.toggle} note={note}>
+            <Checkbox id='auto-fill' checked={autoFill} onChange={this.config} note={note}>
               Enable auto-fill
             </Checkbox>
           </dd>
@@ -51,4 +50,14 @@ class ConfigTab extends React.Component {
   }
 }
 
-module.exports = ConfigTab;
+module.exports = createContainer(ConfigTab, {
+  getStores(){
+    return {
+      config: configStore
+    };
+  },
+
+  getPropsFromStores(){
+    return configStore.getState();
+  }
+});
