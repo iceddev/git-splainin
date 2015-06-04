@@ -5,9 +5,9 @@ const chromeApi = require('chromeback')(chrome);
 
 const alt = require('../alt');
 const client = require('../lib/client');
-const getErrorMessage = require('../lib/getErrorMessage');
-const { fetchNewTemplate, submitTemplate } = require('../actions/syncTemplateActions');
-const { cancelChanges, setDeltaTemplate, setDeltaUrl } = require('../actions/editTemplateActions');
+const getErrorMessage = require('../lib/get-error-message');
+const { fetchNewTemplate, submitTemplate } = require('../actions/sync-template-actions');
+const { cancelChanges, setDeltaTemplate, setDeltaUrl } = require('../actions/edit-template-actions');
 
 class TemplateStore {
   constructor(){

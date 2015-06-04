@@ -32,7 +32,7 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],
-      "js": ["fillPullBody.js"],
+      "js": ["fill-pull-body.js"],
       "run_at": "document_end"
     }
   ]
