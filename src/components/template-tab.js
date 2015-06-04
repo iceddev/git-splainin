@@ -4,9 +4,9 @@ const React = require('react');
 const { createContainer } = require('sovereign');
 
 const Button = require('../primed/button');
-const templateStore = require('../stores/template-store');
-const { fetchNewTemplate, submitTemplate } = require('../actions/sync-template-actions');
-const { cancelChanges, setDeltaUrl, setDeltaTemplate } = require('../actions/edit-template-actions');
+const templateStore = require('../stores/template');
+const { fetchNewTemplate, submitTemplate } = require('../actions/sync-template');
+const { cancelChanges, setDeltaUrl, setDeltaTemplate } = require('../actions/edit-template');
 
 class TemplateTab extends React.Component {
   constructor(...args){

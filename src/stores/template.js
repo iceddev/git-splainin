@@ -6,8 +6,8 @@ const chromeApi = require('chromeback')(chrome);
 const alt = require('../alt');
 const client = require('../lib/client');
 const getErrorMessage = require('../lib/get-error-message');
-const { fetchNewTemplate, submitTemplate } = require('../actions/sync-template-actions');
-const { cancelChanges, setDeltaTemplate, setDeltaUrl } = require('../actions/edit-template-actions');
+const { fetchNewTemplate, submitTemplate } = require('../actions/sync-template');
+const { cancelChanges, setDeltaTemplate, setDeltaUrl } = require('../actions/edit-template');
 
 class TemplateStore {
   constructor(){

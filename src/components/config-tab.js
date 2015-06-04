@@ -4,8 +4,8 @@ const React = require('react');
 const { createContainer } = require('sovereign');
 
 const Checkbox = require('../primed/checkbox');
-const configStore = require('../stores/config-store');
-const { setConfig } = require('../actions/config-actions');
+const configStore = require('../stores/config');
+const { setConfig } = require('../actions/config');
 
 class ConfigTab extends React.Component {
   constructor(...args){
