@@ -5,7 +5,7 @@ const chromeApi = require('chromeback')(chrome);
 
 const alt = require('../alt');
 const getErrorMessage = require('../lib/get-error-message');
-const { setConfig } = require('../actions/config-actions');
+const { setConfig } = require('../actions/config');
 
 class ConfigStore {
   constructor(){
