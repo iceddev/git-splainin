@@ -8,13 +8,12 @@ Let's Begin.
 ###Download Options:
 1. The **easy-peasy option** is to get the latest published version from the Chrome webstore, [go here](Link here later).  After installing you will come back here to learn how to [use it right](#use-it-right).
 1. The **quite easy option** is to get the latest release from the project Github repo, [go here](https://github.com/iceddev/git-splainin/releases/latest) for that.  You also can get access to prior versions [here](https://github.com/iceddev/git-splainin/releases). Again, after installing you will come back to [install it good](#install-it-good) and [use it right](#use-it-right).
-1. Choose the **advanced developer option** to develop and [build from source](#build-from-source). The following instructions assume you have git, a github account and Node.js. If you don't have these, you have to [get the tools](#get-tools-if-you-need-them) and do a little set-up:
+1. Choose the **advanced developer option** to develop and [build from source](#build-from-source). The following instructions assume you have git, node.js and npm. If you don't have these, you have to [get the tools](#get-tools-if-you-need-them) and do a little set-up:
 
 
 ###Get tools if you need them
-  * [I need Git](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-  * [I need a Github account](https://github.com/join)
-  * [I need Node.js](https://nodejs.org/download/)
+  * [I need git](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+  * [I need node.js and npm](https://nodejs.org/download/)
 
 
 ###Build from Source
@@ -34,7 +33,7 @@ Let's Begin.
 
     _`npm run serve` -- if you are developing and want a dev server to update automatically with file changes._
 
-  1. Feel awesome, the hard part is done.  Now to intall from from Chrome.
+  1. Feel awesome, the hard part is done.  Now to install in Chrome.
 
 
 ###Install it good:
