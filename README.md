@@ -19,7 +19,7 @@ Let's Begin.
 ###Build from Source
   1. **Get the Source:** Go to your terminal, navigate to the directory where you want to keep the files. From within this directory enter:
 
-    `git clone git@github.com:iceddev/git-splainin.git`
+    `git clone git://github.com/iceddev/git-splainin.git`
 
   1. **Get into the Project:** Go into the directory and get packages with:
 
