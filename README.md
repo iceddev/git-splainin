@@ -7,7 +7,7 @@ Let's Begin.
 
 ###Download Options:
 1. The **easy-peasy option** is to get the latest published version from the Chrome webstore, [go here](Link here later).  After installing you will come back here to learn how to [use it right](https://github.com/iceddev/git-splainin#use-it-right).
-1. The **quite easy option** is to get the latest release from the project Github repo, [go here](https://github.com/iceddev/git-splainin/releases/latest) for that.  You also can get access to prior versions [here](https://github.com/iceddev/git-splainin/releases). Again, after installing you will come back to [install it good](https://github.com/iceddev/git-splainin#install-it-good) and [use it right](https://github.com/iceddev/git-splainin#use-it-right).
+1. The **quite easy option** is to get the latest release from the project Github repo, [go here](https://github.com/iceddev/git-splainin/releases/latest) for that.  You also can get access to prior versions [here](https://github.com/iceddev/git-splainin/releases). Again, after installing you will come back to [install it good](#install-it-good) and [use it right](https://github.com/iceddev/git-splainin#use-it-right).
 1. Choose the **advanced developer option** to develop and [build from source](https://github.com/iceddev/git-splainin#build-from-source). The following instructions assume you have git, a github account and Node.js. If you don't have these, you have to [get the tools](https://github.com/iceddev/git-splainin#get-tools-if-you-need-them) and do a little set-up:
 
 
