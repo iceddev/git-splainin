@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     background: './src/background.js',
     options: './src/options.js',
-    fillPullBody: './src/fillPullBody.js'
+    'fill-pull-body': './src/fill-pull-body.js'
   },
   output: {
     filename: '[name].js',
