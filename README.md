@@ -86,7 +86,7 @@ Your life is about to get incrementally easier.  There are a couple options you 
 
   1. **The Options Page:** Simple, no-frills configuration.  You can either manually enter the template text or point to a source.
 
-  ![Look at the Options Page](/readme-images/options-page.png)
+  ![Look at the Options Page](/readme-images/set-options.png)
 
   1. **To Point to the Template:** We need to point to the application to the PR template you want to use. You will need to point to HTML, Markdown, or plain text. Github allows you to pull the raw content from the a url, click load and then save, as in the example.
 
