@@ -18,9 +18,7 @@ coverage
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
-/background.js
-/options.js
-/fill-pull-body.js
+
 # Dependency directory
 # Commenting this out is preferred by some people, see
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
@@ -31,3 +29,9 @@ node_modules
 
 # Garbage files
 .DS_Store
+
+# Built files
+/background.js
+/options.js
+/fill-pull-body.js
+/dist

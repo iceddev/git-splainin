@@ -4,3 +4,14 @@ node_js:
   - 'iojs'
   - '0.12'
   - '0.10'
+# whenever a tag is pushed, build and push to github releases
+before_deploy: npm run release
+deploy:
+  provider: releases
+  api_key: $GH_TOKEN
+  file: "dist/git-splainin.zip"
+  skip_cleanup: true
+  on:
+    tags: true
+    node: '0.10'
+    all_branches: true
