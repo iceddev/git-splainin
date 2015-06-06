@@ -17,7 +17,8 @@
   "scripts": {
     "test": "gulp lint",
     "build": "gulp",
-    "postinstall": "gulp postInstall",
+    "postinstall": "gulp postinstall",
+    "release": "gulp release",
     "serve": "webpack-dev-server",
     "watch": "gulp --watch"
   },
@@ -31,6 +32,7 @@
     "sovereign": "^0.1.1"
   },
   "devDependencies": {
+    "babel": "^5.5.4",
     "babel-core": "^5.3.3",
     "babel-loader": "^5.0.0",
     "del": "^1.2.0",
@@ -41,6 +43,7 @@
     "gulp-eslint": "^0.12.0",
     "gulp-jscs": "^1.6.0",
     "gulp-util": "^3.0.4",
+    "gulp-zip": "^3.0.2",
     "webpack": "^1.9.5",
     "webpack-dev-server": "^1.8.2",
     "when": "^3.7.3"
