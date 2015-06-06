@@ -14,6 +14,11 @@ chrome.runtime.onMessage.addListener(function(request){
           prBodyElement.value = prBodyElement.value.replace(prTemplate, '');
         }
       }
+      if(request.autoFill){
+        if(!prBodyElement.value){
+          prBodyElement.value = prTemplate;
+        }
+      }
       if(request.replaceTemplate){
         prBodyElement.value = prBodyElement.value.replace(request.replaceTemplate, prTemplate);
       }

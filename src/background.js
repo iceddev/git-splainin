@@ -24,12 +24,12 @@ chrome.pageAction.onClicked.addListener(function(){
 });
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-  const regexUrl = /https:\/\/github\.com\/.*\/.*\/compare\/.*/;
-  if(tab.url.match(regexUrl)){
+  const regexUrl = /https:\/\/github\.com\/.*\/.*\/compare\/..*/;
+  if(regexUrl.test(tab.url)){
     chrome.pageAction.show(tabId);
     chrome.storage.sync.get('autoFill', function(res){
       if(res.autoFill){
-        chrome.tabs.sendMessage(tabId, { fillPR: true });
+        chrome.tabs.sendMessage(tabId, { autoFill: true });
       }
     });
   } else {
