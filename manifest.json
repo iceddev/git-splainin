@@ -3,7 +3,7 @@
 
   "name": "Git-Splainin",
   "description": "You've got some git-splainin' to do",
-  "version": "1.0",
+  "version": "1.0.0",
   "background": {
     "scripts": ["background.js"]
   },
