@@ -6,7 +6,7 @@ It's time to crush the boilerplate text of Github PR templates. This chrome plug
 Let's Begin.
 
 ###Download Options:
-1. The **easy-peasy option** is to get the latest published version from the Chrome webstore, [go here](Link here later).  After installing you will come back here to learn how to [use it right](#use-it-right).
+1. The **easy-peasy option** is to get the latest published version from the Chrome webstore, [go here](https://chrome.google.com/webstore/detail/git-splainin/adbhpaolgdpdjmejdnpakfncfkdneeea).  After installing you will come back here to learn how to [use it right](#use-it-right).
 1. The **quite easy option** is to get the latest release from the project Github repo, [go here](https://github.com/iceddev/git-splainin/releases/latest) for that.  You also can get access to prior versions [here](https://github.com/iceddev/git-splainin/releases). Again, after installing you will come back to [install it good](#install-it-good) and [use it right](#use-it-right).
 1. Choose the **advanced developer option** to develop and [build from source](#build-from-source). The following instructions assume you have git, node.js and npm. If you don't have these, you have to [get the tools](#get-tools-if-you-need-them) and do a little set-up:
 
@@ -85,7 +85,7 @@ Your life is about to get incrementally easier.  There are a couple options you 
 
   1. **The Options Page:** Simple, no-frills configuration.  You can either manually enter the template text or point to a source.
 
-  ![Look at the Options Page](/readme-images/options-page.png)
+  ![Look at the Options Page](/readme-images/set-options.png)
 
   1. **To Point to the Template:** We need to point to the application to the PR template you want to use. You will need to point to HTML, Markdown, or plain text. Github allows you to pull the raw content from the a url, click load and then save, as in the example.
 
