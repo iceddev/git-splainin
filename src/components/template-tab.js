@@ -1,12 +1,16 @@
 'use strict';
 
 const React = require('react');
-const { createContainer } = require('sovereign');
+const { connect } = require('react-redux');
 
 const Button = require('../primed/button');
-const templateStore = require('../stores/template');
-const { fetchNewTemplate, submitTemplate } = require('../actions/sync-template');
-const { cancelChanges, setDeltaUrl, setDeltaTemplate } = require('../actions/edit-template');
+const {
+  fetchNewTemplate,
+  submitTemplate,
+  cancelChanges,
+  setDeltaUrl,
+  setDeltaTemplate
+} = require('../actions');
 
 class TemplateTab extends React.Component {
   constructor(...args){
@@ -24,10 +28,24 @@ class TemplateTab extends React.Component {
     }
   }
   templateChange(event){
-    setDeltaTemplate(event.target.value);
+    const { dispatch } = this.props;
+    dispatch(setDeltaTemplate(event.target.value));
   }
   urlChange(event){
-    setDeltaUrl(event.target.value);
+    const { dispatch } = this.props;
+    dispatch(setDeltaUrl(event.target.value));
+  }
+  submitTemplate(event){
+    const { dispatch } = this.props;
+    dispatch(submitTemplate(event));
+  }
+  cancelChanges(event){
+    const { dispatch } = this.props;
+    dispatch(cancelChanges(event))
+  }
+  fetchNewTemplate(event){
+    const { dispatch } = this.props;
+    dispatch(fetchNewTemplate(event));
   }
   render(){
     const { deltaUrl, deltaTemplate, disableSubmit, disableCancel } = this.props;
@@ -51,7 +69,7 @@ class TemplateTab extends React.Component {
             <div className='input-group'>
               <input className='long' id='url' type='text' name='url' onChange={this.urlChange} value={deltaUrl} />
               <span className='input-group-button'>
-                <Button onClick={fetchNewTemplate}>
+                <Button onClick={this.fetchNewTemplate}>
                   Load <span className='octicon octicon-cloud-download'></span>
                 </Button>
               </span>
@@ -59,22 +77,22 @@ class TemplateTab extends React.Component {
           </dd>
         </dl>
         <div className="form-actions">
-          <Button primary onClick={submitTemplate} disabled={disableSubmit}>Save Changes</Button>
-          <Button onClick={cancelChanges} disabled={disableCancel}>Cancel</Button>
+          <Button primary onClick={this.submitTemplate} disabled={disableSubmit}>Save Changes</Button>
+          <Button onClick={this.cancelChanges} disabled={disableCancel}>Cancel</Button>
         </div>
       </div>
     );
   }
 }
 
-module.exports = createContainer(TemplateTab, {
-  getStores(){
-    return {
-      template: templateStore
-    };
-  },
+function select({ deltaUrl, deltaTemplate, disableSubmit, disableCancel, errorMessage }){
+  return {
+    deltaUrl,
+    deltaTemplate,
+    disableSubmit,
+    disableCancel,
+    errorMessage
+  };
+}
 
-  getPropsFromStores(){
-    return templateStore.getState();
-  }
-});
+module.exports = connect(select)(TemplateTab);

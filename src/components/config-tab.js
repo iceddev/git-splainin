@@ -1,18 +1,18 @@
 'use strict';
 
 const React = require('react');
-const { createContainer } = require('sovereign');
+const { connect } = require('react-redux');
 
+const { setConfig } = require('../actions');
 const Checkbox = require('../primed/checkbox');
-const configStore = require('../stores/config');
-const { setConfig } = require('../actions/config');
 
 class ConfigTab extends React.Component {
   constructor(...args){
     super(...args);
   }
   config(event){
-    setConfig(event.target.checked);
+    const { dispatch } = this.props;
+    dispatch(setConfig(event.target.checked));
   }
   renderError(){
     const { errorMessage } = this.props;
@@ -50,14 +50,11 @@ class ConfigTab extends React.Component {
   }
 }
 
-module.exports = createContainer(ConfigTab, {
-  getStores(){
-    return {
-      config: configStore
-    };
-  },
+function select({ errorMessage, autoFill }){
+  return {
+    errorMessage,
+    autoFill
+  };
+}
 
-  getPropsFromStores(){
-    return configStore.getState();
-  }
-});
+module.exports = connect(select)(ConfigTab);

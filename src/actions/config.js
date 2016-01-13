@@ -1,11 +1,12 @@
 'use strict';
 
-const alt = require('../alt');
+const { SET_CONFIG } = require('./types');
 
-class ConfigActions {
+module.exports = {
   setConfig(settings){
-    this.dispatch(settings);
+    return {
+      type: SET_CONFIG,
+      settings
+    };
   }
 }
-
-module.exports = alt.createActions(ConfigActions);

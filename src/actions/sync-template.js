@@ -1,15 +1,18 @@
 'use strict';
 
-const alt = require('../alt');
+const { FETCH_NEW_TEMPLATE, SUBMIT_TEMPLATE } = require('./types');
 
-class SyncTemplateActions {
+module.exports = {
   fetchNewTemplate(settings){
-    this.dispatch(settings);
+    return {
+      type: FETCH_NEW_TEMPLATE,
+      settings
+    };
   }
 
   submitTemplate(){
-    this.dispatch();
+    return {
+      type: SUBMIT_TEMPLATE,
+    };
   }
 }
-
-module.exports = alt.createActions(SyncTemplateActions);

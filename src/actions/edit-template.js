@@ -1,19 +1,25 @@
 'use strict';
 
-const alt = require('../alt');
+const { CANCEL_CHANGES, SET_DELTA_TEMPLATE, SET_DELTA_URL } = require('./types');
 
-class EditTemplateActions {
+module.exports = {
   cancelChanges(){
-    this.dispatch();
+    return {
+      type: CANCEL_CHANGES,
+    };
   }
 
-  setDeltaTemplate(newTemplate){
-    this.dispatch(newTemplate);
+  setDeltaTemplate(deltaTemplate){
+    return {
+      type: SET_DELTA_TEMPLATE,
+      deltaTemplate
+    };
   }
 
-  setDeltaUrl(newUrl){
-    this.dispatch(newUrl);
+  setDeltaUrl(deltaUrl){
+    return {
+      type: SET_DELTA_URL,
+      deltaUrl
+    };
   }
 }
-
-module.exports = alt.createActions(EditTemplateActions);
