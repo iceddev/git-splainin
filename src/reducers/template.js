@@ -12,9 +12,11 @@ const { cancelChanges, setDeltaTemplate, setDeltaUrl } = require('../actions/edi
 class TemplateStore {
   constructor(){
     this.state = {
+      autoFill: null,
+      configError: null,
       prTemplate: null,
       templateUrl: null,
-      errorMessage: null,
+      templateError: null,
       deltaUrl: null,
       deltaTemplate: null,
       disableCancel: true,

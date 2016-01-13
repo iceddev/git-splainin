@@ -15,4 +15,4 @@ module.exports = {
       type: SUBMIT_TEMPLATE,
     };
   }
-}
+};

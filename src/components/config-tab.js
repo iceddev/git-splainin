@@ -3,7 +3,7 @@
 const React = require('react');
 const { connect } = require('react-redux');
 
-const { setConfig } = require('../actions');
+const { saveConfig, getConfig } = require('../actions');
 const Checkbox = require('../primed/checkbox');
 
 class ConfigTab extends React.Component {
@@ -12,15 +12,15 @@ class ConfigTab extends React.Component {
   }
   config(event){
     const { dispatch } = this.props;
-    dispatch(setConfig(event.target.checked));
+    dispatch(saveConfig({ autoFill: event.target.checked }));
   }
   renderError(){
-    const { errorMessage } = this.props;
+    const { configError } = this.props;
 
-    if(errorMessage){
+    if(configError){
       return (
         <div className="flash flash-error">
-          {errorMessage}
+          {configError}
         </div>
        );
     }
@@ -50,10 +50,9 @@ class ConfigTab extends React.Component {
   }
 }
 
-function select({ errorMessage, autoFill }){
+function select({ config }){
   return {
-    errorMessage,
-    autoFill
+    config
   };
 }
 

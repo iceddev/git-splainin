@@ -1,52 +1,16 @@
 'use strict';
 
-const _ = require('lodash');
-const chromeApi = require('chromeback')(chrome);
+const { assign } = require('lodash');
 
-const alt = require('../alt');
-const getErrorMessage = require('../lib/get-error-message');
-const { setConfig } = require('../actions/config');
+const { SET_CONFIG } = require('../actions/types');
 
-class ConfigStore {
-  constructor(){
-    this.state = {
-      autoFill: null,
-      errorMessage: null
-    };
-
-    this.bindListeners({
-      handleSetConfig: setConfig
-    });
-
-    chromeApi.storage.sync.get('autoFill', (err, res)=>{
-      if(err){
-        this.setState({ errorMessage: getErrorMessage(err) });
-      } else {
-        this.setState({ autoFill: res.autoFill });
-      }
-    });
-  }
-
-  handleSetConfig(settings){
-    chromeApi.storage.sync.set({ autoFill: settings }, (err)=>{
-      if(err){
-        this.setState({ errorMessage: getErrorMessage(err) });
-      } else {
-        this.setState({ autoFill: settings });
-        if(settings){
-          chrome.tabs.query({ url: 'https://github.com/*/*' }, function(tabs){
-            _.forEach(tabs, function(tab){
-              chrome.tabs.sendMessage(tab.id, { fillPR: true });
-            });
-          });
-        }
-      }
-    });
+function configReducer(state = initialState, action) {
+  switch (action.type) {
+    case SET_CONFIG:
+      return assign({}, state, action.settings)
+    default:
+      return state
   }
 }
 
-ConfigStore.config = {
-  stateKey: 'state'
-};
-
-module.exports = alt.createStore(ConfigStore);
+module.exports = configReducer;

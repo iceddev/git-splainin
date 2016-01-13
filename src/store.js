@@ -1,9 +1,12 @@
 'use strict';
 
-const { combineReducers, createStore } = require('redux');
+const thunk = require('redux-thunk');
+const { createStore, applyMiddleware } = require('redux');
 
-const reducer = combineReducers(require('./reducers'));
+const reducers = require('./reducers');
 
-const store = createStore(reducer);
+const middleware = applyMiddleware(thunk)(createStore);
+
+const store = middleware(reducers);
 
 module.exports = store;
